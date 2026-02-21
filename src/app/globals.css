@@ -91,6 +91,16 @@ body {
   animation: slide-in-from-right 0.3s ease-out;
 }
 
+/* Pixel avatar bob animation */
+@keyframes pixel-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.animate-pixel-bob {
+  animation: pixel-bob 2s ease-in-out infinite;
+}
+
 /* Swiper customization */
 .swiper-button-next,
 .swiper-button-prev {
