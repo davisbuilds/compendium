@@ -3,9 +3,9 @@ import { Sidebar } from "@/components/Sidebar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Productiv - Productivity Tips from Successful Entrepreneurs",
+  title: "Compendium",
   description:
-    "A collection of one-pagers, templates, and productivity tips from successful entrepreneurs and technologists.",
+    "A curated collection of one-pagers, templates, and advice from successful entrepreneurs and technologists.",
 };
 
 export default function RootLayout({

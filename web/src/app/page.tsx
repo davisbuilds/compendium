@@ -9,11 +9,11 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className="mb-12">
         <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
-          Productiv
+          Compendium
         </h1>
         <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-          A curated collection of one-pagers, templates, and productivity tips
-          from successful entrepreneurs and technologists.
+          A curated collection of one-pagers, templates, and advice from
+          successful entrepreneurs and technologists.
         </p>
       </div>
 

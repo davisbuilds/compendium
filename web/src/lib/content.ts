@@ -30,14 +30,14 @@ export interface Template {
 }
 
 export const categories: { id: Category; label: string; color: string }[] = [
-  { id: "productivity", label: "Productivity", color: "bg-blue-100 text-blue-800" },
-  { id: "success", label: "Success", color: "bg-green-100 text-green-800" },
-  { id: "startups", label: "Startups", color: "bg-purple-100 text-purple-800" },
-  { id: "fundraising", label: "Fundraising", color: "bg-yellow-100 text-yellow-800" },
-  { id: "hiring", label: "Hiring", color: "bg-orange-100 text-orange-800" },
-  { id: "career", label: "Career", color: "bg-pink-100 text-pink-800" },
-  { id: "life-advice", label: "Life Advice", color: "bg-teal-100 text-teal-800" },
-  { id: "communication", label: "Communication", color: "bg-indigo-100 text-indigo-800" },
+  { id: "productivity", label: "Productivity", color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" },
+  { id: "success", label: "Success", color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" },
+  { id: "startups", label: "Startups", color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300" },
+  { id: "fundraising", label: "Fundraising", color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300" },
+  { id: "hiring", label: "Hiring", color: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300" },
+  { id: "career", label: "Career", color: "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300" },
+  { id: "life-advice", label: "Life Advice", color: "bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300" },
+  { id: "communication", label: "Communication", color: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300" },
 ];
 
 export const personas: Persona[] = [

@@ -1,18 +1,15 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, FileText } from "lucide-react";
 import { templates } from "@/lib/content";
 import { PdfViewer } from "@/components/PdfViewer";
-import { Button } from "@/components/ui/button";
 
 export default function TemplatePage() {
   const params = useParams();
-  const router = useRouter();
   const slug = params.slug as string;
 
-  // Find the template by matching the slug (filename without .pdf)
   const template = templates.find(
     (t) => t.filename.replace(".pdf", "") === slug
   );
@@ -21,10 +18,13 @@ export default function TemplatePage() {
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4 p-6">
         <h1 className="text-2xl font-bold">Template not found</h1>
-        <Button variant="outline" onClick={() => router.push("/")}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800"
+        >
+          <ArrowLeft className="h-4 w-4" />
           Back to Home
-        </Button>
+        </Link>
       </div>
     );
   }
@@ -35,7 +35,7 @@ export default function TemplatePage() {
       <div className="mb-8">
         <Link
           href="/"
-          className="mb-4 inline-flex items-center text-sm text-neutral-500 hover:text-neutral-900"
+          className="mb-4 inline-flex items-center text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
         >
           <ArrowLeft className="mr-1 h-4 w-4" />
           Back to Home

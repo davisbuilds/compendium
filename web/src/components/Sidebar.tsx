@@ -47,7 +47,7 @@ function SidebarContent({ onNavigate }: SidebarContentProps) {
       {/* Logo/Title */}
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold" onClick={onNavigate}>
-          <span className="text-xl">Productiv</span>
+          <span className="text-xl">Compendium</span>
         </Link>
       </div>
 
@@ -109,7 +109,7 @@ function SidebarContent({ onNavigate }: SidebarContentProps) {
       {/* Footer */}
       <div className="border-t p-4">
         <p className="text-xs text-neutral-500">
-          A collection of productivity tips from successful entrepreneurs
+          A curated collection of advice from successful entrepreneurs
         </p>
       </div>
     </div>
@@ -138,7 +138,7 @@ export function Sidebar() {
           </SheetContent>
         </Sheet>
         <Link href="/" className="font-semibold">
-          Productiv
+          Compendium
         </Link>
       </div>
 
