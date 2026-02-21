@@ -20,6 +20,7 @@ export interface Persona {
   name: string;
   slug: string;
   description: string;
+  avatar: string;
   content: ContentItem[];
 }
 
@@ -46,6 +47,7 @@ export const personas: Persona[] = [
     name: "Daniel Gross",
     slug: "daniel-gross",
     description: "Entrepreneur, investor, and former Y Combinator partner",
+    avatar: "avatar.png",
     content: [
       {
         filename: "DGross_HowToWin.png",
@@ -60,6 +62,7 @@ export const personas: Persona[] = [
     name: "Elon Musk",
     slug: "elon-musk",
     description: "CEO of Tesla and SpaceX, founder of multiple companies",
+    avatar: "avatar.png",
     content: [
       {
         filename: "Elon_2018email.PNG",
@@ -80,6 +83,7 @@ export const personas: Persona[] = [
     name: "Marc Andreessen",
     slug: "marc-andreessen",
     description: "Co-founder of Netscape and Andreessen Horowitz",
+    avatar: "avatar.png",
     content: [
       {
         filename: "Pmarca_CareerPlanning.png",
@@ -112,6 +116,7 @@ export const personas: Persona[] = [
     name: "Nat Friedman",
     slug: "nat-friedman",
     description: "Former CEO of GitHub, entrepreneur and investor",
+    avatar: "avatar.png",
     content: [
       {
         filename: "NatFriedman_productivity.jpg",
@@ -126,6 +131,7 @@ export const personas: Persona[] = [
     name: "Naval Ravikant",
     slug: "naval-ravikant",
     description: "Co-founder of AngelList, philosopher and angel investor",
+    avatar: "avatar.png",
     content: [
       {
         filename: "Naval_HowToGetRich.JPG",
@@ -140,6 +146,7 @@ export const personas: Persona[] = [
     name: "Paul Graham",
     slug: "paul-graham",
     description: "Co-founder of Y Combinator, essayist and programmer",
+    avatar: "avatar.png",
     content: [
       {
         filename: "PG_HowToRaiseMoney.png",
@@ -160,6 +167,7 @@ export const personas: Persona[] = [
     name: "Sam Altman",
     slug: "sam-altman",
     description: "CEO of OpenAI, former president of Y Combinator",
+    avatar: "avatar.png",
     content: [
       {
         filename: "Altman_HowToStartStartup.png",
@@ -186,6 +194,7 @@ export const personas: Persona[] = [
     name: "Tim Ferriss",
     slug: "tim-ferriss",
     description: "Author of The 4-Hour Workweek, podcaster and investor",
+    avatar: "avatar.png",
     content: [
       {
         filename: "Tferriss_productivity.JPG",
