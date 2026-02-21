@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { User, FileText, ArrowRight } from "lucide-react";
+import { FileText, ArrowRight } from "lucide-react";
+import { PixelAvatar } from "@/components/PixelAvatar";
 import { personas, templates, categories } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 
@@ -45,9 +46,7 @@ export default function HomePage() {
               className="group rounded-lg border bg-white p-4 transition-all hover:border-neutral-300 hover:shadow-md dark:bg-neutral-900 dark:hover:border-neutral-700"
             >
               <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800">
-                  <User className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
-                </div>
+                <PixelAvatar slug={persona.slug} name={persona.name} size="md" />
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold group-hover:text-blue-600">
                     {persona.name}

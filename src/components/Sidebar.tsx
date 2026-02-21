@@ -3,7 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, User, FileText, Home } from "lucide-react";
+import { Menu, FileText, Home } from "lucide-react";
+import { PixelAvatar } from "@/components/PixelAvatar";
 import { cn } from "@/lib/utils";
 import { personas, templates } from "@/lib/content";
 import { Button } from "@/components/ui/button";
@@ -75,7 +76,7 @@ function SidebarContent({ onNavigate }: SidebarContentProps) {
               <NavItem
                 key={persona.id}
                 href={`/persona/${persona.slug}`}
-                icon={<User className="h-4 w-4" />}
+                icon={<PixelAvatar slug={persona.slug} name={persona.name} size="sm" />}
                 isActive={pathname === `/persona/${persona.slug}`}
                 onClick={onNavigate}
               >

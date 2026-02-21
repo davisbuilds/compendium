@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowLeft, User } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { PixelAvatar } from "@/components/PixelAvatar";
 import { categories, type Category, type Persona } from "@/lib/content";
 import { ImageSlideshow } from "@/components/ImageSlideshow";
 import { Badge } from "@/components/ui/badge";
@@ -58,9 +59,7 @@ export function PersonaPageClient({ persona }: { persona: Persona | null }) {
         </Link>
 
         <div className="flex items-start gap-4">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800">
-            <User className="h-8 w-8 text-neutral-600 dark:text-neutral-400" />
-          </div>
+          <PixelAvatar slug={persona.slug} name={persona.name} size="lg" />
           <div>
             <h1 className="text-3xl font-bold">{persona.name}</h1>
             <p className="mt-1 text-neutral-600 dark:text-neutral-400">
