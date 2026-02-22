@@ -5,14 +5,14 @@ from google.genai import types
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 PERSONAS = [
-    ("daniel-gross", "Daniel Gross, young tech entrepreneur with dark hair and glasses"),
+    ("daniel-gross", "Daniel Gross, fair-skinned, slim build, short dark hair, sharp features, composed expression"),
     ("elon-musk", "Elon Musk, distinctive sharp features and short hair"),
     ("marc-andreessen", "Marc Andreessen, tall bald man with a broad smile"),
-    ("nat-friedman", "Nat Friedman, friendly face with short brown hair and beard"),
-    ("naval-ravikant", "Naval Ravikant, Indian-American man with salt-and-pepper hair"),
-    ("paul-graham", "Paul Graham, older man with receding reddish hair and thoughtful expression"),
-    ("sam-altman", "Sam Altman, young man with light brown hair and clean-shaven face"),
-    ("tim-ferriss", "Tim Ferriss, athletic build with short dark hair"),
+    ("nat-friedman", "Nat Friedman, slim build, fair complexion, short light-brown hair, broad smile, clean shaven"),
+    ("naval-ravikant", "Naval Ravikant, Indian-American, medium build, salt-and-pepper curly hair, warm smile, expressive eyes"),
+    ("paul-graham", "Paul Graham, fair-skinned, round-faced, short light-brown hair, thoughtful expression, approachable appearance"),
+    ("sam-altman", "Sam Altman, slim build, short brown hair, light eyes, calm expression, understated demeanor"),
+    ("tim-ferriss", "Tim Ferriss, bald head, athletic build, clean-shaven"),
 ]
 
 BASE_DIR = os.path.join(os.path.dirname(__file__), "..", "public", "content", "personas")

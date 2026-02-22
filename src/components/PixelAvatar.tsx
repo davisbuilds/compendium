@@ -48,7 +48,7 @@ export function PixelAvatar({ slug, name, size, className }: PixelAvatarProps) {
       width={px}
       height={px}
       className={cn(
-        "shrink-0 rounded-full animate-pixel-bob [image-rendering:pixelated]",
+        "shrink-0 rounded-full [image-rendering:pixelated]",
         className
       )}
       onError={() => setError(true)}
