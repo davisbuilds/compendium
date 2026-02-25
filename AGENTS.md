@@ -10,6 +10,10 @@ pnpm build  # production build
 pnpm lint   # eslint
 ```
 
+## Testing
+
+- Use `pnpm exec playwright test` for browser-based end-to-end UI testing.
+
 ## Architecture
 
 - **App Router** with `src/` directory, `@/` path alias
