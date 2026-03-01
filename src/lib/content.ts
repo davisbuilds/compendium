@@ -234,15 +234,3 @@ export function getContentByCategory(category: Category): { persona: Persona; it
   }
   return results;
 }
-
-export function getAllCategories(): Category[] {
-  const categorySet = new Set<Category>();
-  for (const persona of personas) {
-    for (const item of persona.content) {
-      for (const category of item.categories) {
-        categorySet.add(category);
-      }
-    }
-  }
-  return Array.from(categorySet);
-}

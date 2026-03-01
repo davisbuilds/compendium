@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:dead-code": "node scripts/dead-code-check.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
