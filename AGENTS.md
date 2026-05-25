@@ -4,6 +4,14 @@ Guidance for coding agents working in this repository.
 
 Curated one-pagers, templates, and advice from entrepreneurs/technologists. Next.js 16 + React 19 + Tailwind 4 + TypeScript.
 
+## Documentation Map
+
+- `docs/system/ARCHITECTURE.md` — high-level flow, App Router structure, content data model, components, static-asset conventions, directory map.
+- `docs/system/FEATURES.md` — persona/template/category pages, navigation, persona roster, dark mode.
+- `docs/system/OPERATIONS.md` — local dev, commands, env vars, CI, adding content (persona/template/category), deployment.
+- `docs/project/ROADMAP.md` — completed highlights and open areas.
+- `docs/project/GIT_HISTORY_POLICY.md` — merge strategy and branch hygiene.
+
 ## Commands
 
 ```bash
@@ -15,7 +23,7 @@ pnpm lint   # eslint
 ## Key Files Reference
 
 | Purpose | Location |
-|---------|----------|
+| :----- | :----- |
 | Content data (all personas, templates, categories) | `src/lib/content.ts` |
 | Root layout + dark mode + sidebar shell | `src/app/layout.tsx` |
 | Sidebar navigation (mobile sheet + desktop fixed) | `src/components/Sidebar.tsx` |
@@ -41,8 +49,7 @@ pnpm lint   # eslint
 
 **TDD**: Use red/green TDD for new features and major changes.
 
-**Key patterns**:
-- Use `pnpm exec playwright test` for browser-based end-to-end UI testing.
+**E2E**: Use `pnpm exec playwright test` for browser-based end-to-end UI testing.
 
 ## Adding Content
 
@@ -65,3 +72,8 @@ pnpm lint   # eslint
 
 - pnpm (not npm/yarn)
 - Tailwind utility classes, dark mode via `dark:` variants
+
+## Working Agreement
+
+- **Push back before building.** If a request is incoherent or self-contradictory, or a spec/plan is vague or skips key decisions, stop and interview me — ask clarifying questions and confirm intent before writing code or changing files. Don't guess at scope or comply silently. (Clear, well-scoped requests don't need this.)
+- **Keep docs current.** After a significant change, PR, or completed spec/plan, update any now-stale reference docs under `docs/system/` (and `docs/project/ROADMAP.md`) so they match shipped behavior. Skip this for trivial changes.
