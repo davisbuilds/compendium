@@ -1,6 +1,7 @@
 # Compendium
 
-A curated collection of one-pagers, templates, and advice from successful entrepreneurs and technologists.
+Static Next.js site for curated one-pagers, templates, and advice from successful
+entrepreneurs and technologists.
 
 ## Agent Setup
 
@@ -24,21 +25,62 @@ Don't commit anything.
 
 Prefer to do it yourself? The manual steps are below.
 
-## Getting Started
+## What It Does
+
+- Presents curated founder/operator one-pagers and templates.
+- Keeps content static in `src/lib/content.ts`.
+- Uses a Next.js 16 / React 19 / Tailwind 4 frontend.
+- Ships without runtime secrets or environment variables.
+- Includes a dead-code check for the small static app surface.
+
+## Quick Start
+
+Requirements:
+
+- Node.js compatible with Next.js 16
+- pnpm
 
 ```bash
+git clone https://github.com/davisbuilds/compendium.git
+cd compendium
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view.
+Open `http://localhost:3000`.
+
+## Common Commands
+
+```bash
+pnpm dev             # Start local dev server
+pnpm lint            # ESLint
+pnpm test:dead-code  # Static dead-code check
+pnpm build           # Production build
+pnpm start           # Start production server after build
+```
+
+## Code Layout
+
+```text
+src/app/          Next.js App Router routes
+src/components/   UI components
+src/lib/          Static content and shared helpers
+scripts/          Dead-code check
+docs/             System, project, and plan docs
+```
 
 ## Documentation
 
-- Contributor workflow and PR expectations: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Agent implementation guidance: [AGENTS.md](AGENTS.md)
 - Architecture and code organization: [docs/system/ARCHITECTURE.md](docs/system/ARCHITECTURE.md)
 - Feature reference: [docs/system/FEATURES.md](docs/system/FEATURES.md)
 - Setup and operations: [docs/system/OPERATIONS.md](docs/system/OPERATIONS.md)
 - Product roadmap snapshot: [docs/project/ROADMAP.md](docs/project/ROADMAP.md)
 - Git history and branch policy: [docs/project/GIT_HISTORY_POLICY.md](docs/project/GIT_HISTORY_POLICY.md)
+- Contributor workflow and PR expectations: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Current Boundaries
+
+- Content is static and repo-authored.
+- There are no runtime env vars or secrets.
+- `pnpm lint`, `pnpm test:dead-code`, and `pnpm build` are the expected local gates.
