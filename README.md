@@ -14,9 +14,9 @@ with Next.js 16, React 19, Tailwind 4, and TypeScript. All content is static
 Do this, in order:
 1. Install deps with pnpm (not npm/yarn): `pnpm install` from the repo root. Clone
    https://github.com/davisbuilds/compendium.git and cd in first if needed.
-2. Verify it builds: run `pnpm lint` then `pnpm build`. Both should pass. If either
-   fails, show me the error and stop.
-3. Report back: confirm lint + build passed, and give me the command to run it
+2. Verify it builds: run `pnpm lint`, `pnpm test:dead-code`, then `pnpm build`.
+   All should pass. If any fail, show me the error and stop.
+3. Report back: confirm lint + dead-code + build passed, and give me the command to run it
    (`pnpm dev`, then open http://localhost:3000).
 
 Don't commit anything.

@@ -18,6 +18,7 @@ Curated one-pagers, templates, and advice from entrepreneurs/technologists. Next
 pnpm dev    # dev server on :3000
 pnpm build  # production build
 pnpm lint   # eslint
+pnpm test:dead-code # static unreferenced export/file check
 ```
 
 ## Key Files Reference
@@ -45,7 +46,7 @@ pnpm lint   # eslint
 
 ## Testing
 
-**Pre-push check**: Before pushing updates to the remote, run `pnpm lint` and `pnpm build`.
+**Pre-push check**: Before pushing updates to the remote, run `pnpm lint`, `pnpm test:dead-code`, and `pnpm build`.
 
 **TDD**: Use red/green TDD for new features and major changes.
 
@@ -77,3 +78,4 @@ pnpm lint   # eslint
 
 - **Push back before building.** If a request is incoherent or self-contradictory, or a spec/plan is vague or skips key decisions, stop and interview me — ask clarifying questions and confirm intent before writing code or changing files. Don't guess at scope or comply silently. (Clear, well-scoped requests don't need this.)
 - **Keep docs current.** After a significant change, PR, or completed spec/plan, update any now-stale reference docs under `docs/system/` (and `docs/project/ROADMAP.md`) so they match shipped behavior. Skip this for trivial changes.
+- **Commit logically.** Commit completed work in coherent chunks as you proceed. Push only when explicitly asked.
