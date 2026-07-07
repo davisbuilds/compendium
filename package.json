@@ -7,9 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "pnpm lint && pnpm test:dead-code",
+    "test": "pnpm lint && pnpm test:unit && pnpm test:dead-code",
     "lint": "eslint",
-    "test:dead-code": "node scripts/dead-code-check.mjs"
+    "test:dead-code": "node scripts/dead-code-check.mjs",
+    "test:unit": "node --import tsx --test \"__tests__/*.test.ts\" \"__tests__/*.test.tsx\""
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -32,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4.3.2",
+    "tsx": "^4.23.0",
     "typescript": "^5"
   },
   "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916"

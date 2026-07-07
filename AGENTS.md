@@ -18,6 +18,7 @@ Curated one-pagers, templates, and advice from entrepreneurs/technologists. Next
 pnpm dev    # dev server on :3000
 pnpm build  # production build
 pnpm lint   # eslint
+pnpm test:unit      # node:test suite (content/rendering/utils)
 pnpm test:dead-code # static unreferenced export/file check
 ```
 
@@ -46,7 +47,7 @@ pnpm test:dead-code # static unreferenced export/file check
 
 ## Testing
 
-**Pre-push check**: Before pushing updates to the remote, run `pnpm lint`, `pnpm test:dead-code`, and `pnpm build`.
+**Pre-push check**: Before pushing updates to the remote, run `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build`.
 
 **TDD**: Use red/green TDD for new features and major changes.
 

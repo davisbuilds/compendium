@@ -37,6 +37,9 @@ jobs:
       - name: Run ESLint
         run: pnpm lint
 
+      - name: Run unit tests
+        run: pnpm test:unit
+
       - name: Run dead-code check
         run: pnpm test:dead-code
 
