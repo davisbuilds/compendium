@@ -47,11 +47,9 @@ pnpm test:dead-code # static unreferenced export/file check
 
 ## Testing
 
-**Pre-push check**: Before pushing updates to the remote, run `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build`.
-
-**TDD**: Use red/green TDD for new features and major changes.
-
-**E2E**: Use `pnpm exec playwright test` for browser-based end-to-end UI testing.
+- **Pre-push check**: Before pushing to the remote, run `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build`.
+- **TDD**: red/green for new features, major refactors, and large changes. The red step must fail for the behavior you're about to fix — a test that fails only because the symbol doesn't exist yet is a stub, not a red test; write the signature first, then a test that fails on the behavior. Skip the red step for code with no behavior to assert, and cover it after. For smaller edits, still run the relevant existing tests before wrapping up.
+- **E2E**: `pnpm exec playwright test` for browser-based end-to-end UI testing.
 
 ## Adding Content
 
