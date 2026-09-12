@@ -10,7 +10,7 @@ import {
   personas,
   templates,
   type Category,
-} from "../src/lib/content.ts";
+} from "../src/lib/content";
 
 const categoryIds = new Set<Category>(categories.map((category) => category.id));
 
