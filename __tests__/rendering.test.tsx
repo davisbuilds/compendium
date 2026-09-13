@@ -4,11 +4,11 @@ import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import CategoryPage from "../src/app/category/[category]/page.tsx";
-import HomePage from "../src/app/page.tsx";
-import { Button } from "../src/components/ui/button.tsx";
-import { Badge } from "../src/components/ui/badge.tsx";
-import { categories, getContentByCategory, personas, templates } from "../src/lib/content.ts";
+import CategoryPage from "../src/app/category/[category]/page";
+import HomePage from "../src/app/page";
+import { Button } from "../src/components/ui/button";
+import { Badge } from "../src/components/ui/badge";
+import { categories, getContentByCategory, personas, templates } from "../src/lib/content";
 
 test("home page renders category, persona, and template navigation", () => {
   const html = renderToStaticMarkup(<HomePage />);
