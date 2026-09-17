@@ -2,9 +2,14 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ArrowLeft, FileText } from "lucide-react";
 import { templates } from "@/lib/content";
-import { PdfViewer } from "@/components/PdfViewer";
+
+const PdfViewer = dynamic(
+  () => import("@/components/PdfViewer").then((mod) => mod.PdfViewer),
+  { ssr: false }
+);
 
 export default function TemplatePage() {
   const params = useParams();

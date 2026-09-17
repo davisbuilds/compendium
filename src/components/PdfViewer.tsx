@@ -164,6 +164,7 @@ export function PdfViewer({ src, title }: PdfViewerProps) {
           onLoadSuccess={onDocumentLoadSuccess}
           onLoadError={onDocumentLoadError}
           loading={null}
+          suspense={false}
           className="flex justify-center"
         >
           <Page
