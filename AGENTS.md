@@ -80,3 +80,13 @@ pnpm test:dead-code # static unreferenced export/file check
 - **Commit logically.** Commit completed work in coherent chunks as you proceed. Push only when explicitly asked.
 - **Log durable follow-ups in `BACKLOG.md`.** Note design gaps, tech debt, or better approaches you spot mid-task in `docs/project/BACKLOG.md`; fix simple, quick, or blocking issues inline and call them out. Add an item only for recurring friction, meaningful risk/cost, an unresolved decision, or a concrete trigger. Record **What / Why or evidence / Next or Revisit when**; keep the backlog future-only, use the capability-owning repository as canonical for cross-repo work, date/source volatile claims (or label a hypothesis), and move shipped work to `docs/project/ROADMAP.md`. Review after a significant shipped slice or at least quarterly.
 - **Re-ground after compaction.** A compaction summary loses precise paths, context, and verification state — before continuing, re-read this project's `AGENTS.md`, its reference docs, and recent commits.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
