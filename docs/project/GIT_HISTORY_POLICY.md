@@ -1,10 +1,10 @@
 # Git History and Branch Hygiene
 
-Last updated: February 22, 2026
+Last verified: September 27, 2026
 
 ## Repository Merge Settings
 
-Configured on GitHub repository `davisbuilds/compendium`:
+Observed via `gh api repos/davisbuilds/compendium` on 2026-09-27 (public repository). Re-query mutable settings before relying on them:
 
 - `allow_squash_merge`: `true`
 - `allow_merge_commit`: `false`
@@ -25,23 +25,22 @@ Squash-merge only. All other merge strategies are disabled at the repository lev
 
 ## CI Gates
 
-This project does not have a CI pipeline. Quality gates before merge:
+Tracked `.github/workflows/ci.yml` runs on pull requests and main pushes. It checks:
 
 - `pnpm lint`
+- `pnpm test:unit`
+- `pnpm test:dead-code`
 - `pnpm build`
+
+Check relevant UI changes in a real browser before delivery.
 
 ## Current Limitation
 
-`main` branch protection is not enabled because GitHub returned `403` for branch protection APIs on this private repository tier. Until upgraded, enforce checks and review discipline by team convention.
+The older private-tier `403` observation no longer describes this public repository. Branch protection was not re-verified in this documentation pass; query GitHub before relying on server enforcement. Review and CI remain the intended merge policy.
 
 ## Recommended Ongoing Hygiene
 
 1. Create short-lived feature branches from `main`.
 2. Open PRs early; keep them focused.
 3. Merge only with **Squash and merge** after quality checks pass.
-4. Periodically prune local branches:
-
-```bash
-git fetch --prune
-git branch --merged main | grep -v ' main$' | xargs -n 1 git branch -d
-```
+4. Before local cleanup, refresh refs, inspect attached worktrees and branch history, then delete only an individually verified, disposable branch. Preserve concurrent work and unmerged changes.

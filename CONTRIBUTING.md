@@ -1,56 +1,19 @@
 # Contributing
 
-This repository uses a squash-merge workflow to keep `main` history clean and readable.
+Bug reports, focused content corrections, accessibility fixes, documentation
+improvements, and supported proposals are welcome. Discuss substantial layout
+changes, new dependencies, content categories, or public-facing features before
+major implementation. This is a solo-maintained curated site; a proposal does
+not imply a support or response-time promise.
 
-## Workflow
+Agent-assisted work is welcome. Submitters should understand the change's intent,
+visible behavior, content provenance, tradeoffs, and verification. Explain any
+limitations in the PR; no prompt transcript or manual rewrite is required.
+A clear [Backlog](docs/project/BACKLOG.md) entry can go directly to a PR; use an
+issue when persistent discussion or coordination helps.
 
-1. Sync local `main`.
-2. Create a feature branch from `main`.
-3. Make focused changes and commit normally.
-4. Push branch and open a pull request.
-5. Merge with **Squash and merge** after quality checks pass.
-6. Let GitHub auto-delete the merged remote branch.
-7. Prune merged local branches periodically.
-
-## Branch Naming
-
-Use descriptive prefixes:
-
-- `feat/<name>`
-- `fix/<name>`
-- `chore/<name>`
-- `docs/<name>`
-
-## Commit Guidance
-
-- Keep commits logical and atomic while working on the branch.
-- Use clear, imperative commit messages.
-- It is fine to have multiple commits in one PR; squash merge will combine them on `main`.
-
-## Pull Request Expectations
-
-- Keep PR scope tight (one objective per PR).
-- Include a short summary and test evidence.
-- Ensure quality checks pass before merge:
-  - `pnpm lint`
-  - `pnpm build`
-
-## Local Branch Cleanup
-
-Run periodically:
-
-```bash
-git fetch --prune
-git branch --merged main | grep -v ' main$' | xargs -n 1 git branch -d
-```
-
-## Documentation Hygiene
-
-- Do not hardcode volatile counts in docs.
-- Prefer executable source-of-truth references (for example, `pnpm lint`, `README.md`).
-
-## Related Docs
-
-- Git history and branch hygiene config: `docs/project/GIT_HISTORY_POLICY.md`
-- Agent implementation guidance: `AGENTS.md`
-- Project onboarding: `README.md`
+Work on a focused branch from `main`. [Operations](docs/system/OPERATIONS.md)
+explains adding content and local checks; [Git policy](docs/project/GIT_HISTORY_POLICY.md)
+owns the squash-merge workflow. Describe the result and include lint, unit-test,
+dead-code, build, and relevant browser verification evidence. Content and assets
+are published to the site, so confirm the right to include them.

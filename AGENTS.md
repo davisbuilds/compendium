@@ -6,10 +6,12 @@ Curated one-pagers, templates, and advice from entrepreneurs/technologists. Next
 
 ## Documentation Map
 
+- `CONTRIBUTING.md` — contribution scope, review expectations, and delivery policy.
 - `docs/system/ARCHITECTURE.md` — high-level flow, App Router structure, content data model, components, static-asset conventions, directory map.
 - `docs/system/FEATURES.md` — persona/template/category pages, navigation, persona roster, dark mode.
 - `docs/system/OPERATIONS.md` — local dev, commands, env vars, CI, adding content (persona/template/category), deployment.
-- `docs/project/ROADMAP.md` — completed highlights and open areas.
+- `docs/project/ROADMAP.md` — current direction and product scope.
+- `docs/project/BACKLOG.md` — future-only durable follow-ups.
 - `docs/project/GIT_HISTORY_POLICY.md` — merge strategy and branch hygiene.
 
 ## Commands
@@ -76,9 +78,16 @@ pnpm test:dead-code # static unreferenced export/file check
 ## Working Agreement
 
 - **Push back before building.** If a request is incoherent or self-contradictory, or a spec/plan is vague or skips key decisions, stop and interview me — ask clarifying questions and confirm intent before writing code or changing files. Don't guess at scope or comply silently. (Clear, well-scoped requests don't need this.)
-- **Keep docs current.** After a significant change, PR, or completed spec/plan, update any now-stale reference docs under `docs/system/` (and `docs/project/ROADMAP.md`) so they match shipped behavior. Skip this for trivial changes.
+- **Keep docs current.** Update the owning reference when a change makes its contract, boundary, procedure, or direction inaccurate. Routine internal changes need no ceremonial doc edit.
 - **Commit logically.** Commit completed work in coherent chunks as you proceed. Push only when explicitly asked.
-- **Log durable follow-ups in `BACKLOG.md`.** Note design gaps, tech debt, or better approaches you spot mid-task in `docs/project/BACKLOG.md`; fix simple, quick, or blocking issues inline and call them out. Add an item only for recurring friction, meaningful risk/cost, an unresolved decision, or a concrete trigger. Record **What / Why or evidence / Next or Revisit when**; keep the backlog future-only, use the capability-owning repository as canonical for cross-repo work, date/source volatile claims (or label a hypothesis), and move shipped work to `docs/project/ROADMAP.md`. Review after a significant shipped slice or at least quarterly.
+- **Log durable follow-ups in `BACKLOG.md`.** Capture consequential design gaps,
+  tech debt, and better approaches in `docs/project/BACKLOG.md`; fix small or
+  blocking issues inline. Keep entries future-only, with evidence and a next step
+  or revisit trigger; date/source volatile claims or label hypotheses. The
+  capability-owning repo holds cross-repo detail. Agents can work directly from
+  entries; use issues for discussion or coordination with one detailed owner.
+  Reconcile affected entries as work lands; update `ROADMAP.md` when selected
+  direction changes, not as a shipment log.
 - **Re-ground after compaction.** A compaction summary loses precise paths, context, and verification state — before continuing, re-read this project's `AGENTS.md`, its reference docs, and recent commits.
 
 <!-- BEGIN:nextjs-agent-rules -->

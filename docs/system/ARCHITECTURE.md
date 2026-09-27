@@ -69,5 +69,4 @@ src/app/                  # Routes and layouts
 src/components/           # Feature components + ui/ primitives
 src/lib/                  # Content data and utilities
 public/content/           # Static images and PDFs
-docs/plans/               # Implementation plans
 ```
