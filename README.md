@@ -66,7 +66,7 @@ src/app/          Next.js App Router routes
 src/components/   UI components
 src/lib/          Static content and shared helpers
 scripts/          Dead-code check
-docs/             System, project, and plan docs
+docs/             System and project docs
 ```
 
 ## Documentation
@@ -83,4 +83,4 @@ docs/             System, project, and plan docs
 
 - Content is static and repo-authored.
 - There are no runtime env vars or secrets.
-- `pnpm lint`, `pnpm test:dead-code`, and `pnpm build` are the expected local gates.
+- `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build` are the expected local gates.

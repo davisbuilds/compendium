@@ -1,17 +1,16 @@
 # Roadmap
 
-This is a lightweight snapshot, not a release contract.
+Compendium remains a static, curated site for founder/operator one-pagers and
+templates. Content is checked into the repository and rendered through the
+existing persona, category, and template pages;
+[Features](../system/FEATURES.md) owns current behavior and
+[Operations](../system/OPERATIONS.md) explains adding content.
 
-## Completed Highlights
+## Current Direction
 
-- Persona pages with image slideshow and zoom/pan controls.
-- PDF template viewer with page navigation.
-- Category browsing with color-coded badges.
-- Responsive sidebar navigation (fixed desktop, sheet mobile).
-- Pixel art avatars for all personas.
-- Dark mode default with Tailwind theme variants.
-- 8 personas and 2 downloadable templates.
+Keep content easy to browse on desktop and mobile, and preserve the source and
+rights of published assets. Changes to navigation or presentation should be
+checked in a real browser. No next feature or release schedule is selected here.
 
-## Planned / Open Areas
-
-- See `docs/plans/` for active planning documents.
+[Backlog](BACKLOG.md) holds durable unresolved concerns when they arise. Git and
+PRs retain routine delivery history.
