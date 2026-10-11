@@ -1,6 +1,6 @@
 # Git History and Branch Hygiene
 
-Last verified: September 27, 2026
+Last verified: September 27, 2026 (merge settings); October 11, 2026 (branch protection)
 
 ## Repository Merge Settings
 
@@ -34,9 +34,19 @@ Tracked `.github/workflows/ci.yml` runs on pull requests and main pushes. It che
 
 Check relevant UI changes in a real browser before delivery.
 
-## Current Limitation
+## Branch Protection
 
-The older private-tier `403` observation no longer describes this public repository. Branch protection was not re-verified in this documentation pass; query GitHub before relying on server enforcement. Review and CI remain the intended merge policy.
+Verified 2026-10-11 with
+`gh api repos/davisbuilds/compendium/branches/main/protection`:
+`main` requires these GitHub Actions checks before merge:
+
+- `Lint, dead code, and build` (CI)
+- `check` (Publication Hygiene)
+
+Branches need not be up to date with `main`, no reviews are required, and admins
+are not enforced. Required checks match job names, so rename a job and its entry
+in the protection rule together. `Workflow Security Audit` is path-filtered and
+deliberately not required: a required check that never runs blocks every merge.
 
 ## Recommended Ongoing Hygiene
 
