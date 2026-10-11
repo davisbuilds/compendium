@@ -1,6 +1,6 @@
 # Git History and Branch Hygiene
 
-Last verified: September 27, 2026
+Last verified: September 27, 2026 (merge settings); October 11, 2026 (branch protection)
 
 ## Repository Merge Settings
 
