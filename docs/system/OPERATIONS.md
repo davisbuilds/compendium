@@ -77,3 +77,21 @@ CI uses Node.js 24 and `pnpm install --frozen-lockfile`.
 | Template page 404s | Confirm `template.filename` ends in `.pdf` and exists under `public/content/templates/`. |
 | Dead-code check fails | Remove the unused export/file, add a real reference, or add a documented exception in `scripts/dead-code-check.mjs`. |
 | Build fails during static generation | Check `src/lib/content.ts` for invalid category ids, missing assets, or unsupported `ContentItem.type`. |
+
+## Browser runtime
+
+Chromium projects use installed Google Chrome with a separate temporary Playwright
+profile. Install Chrome before browser tests; run `pnpm test:browser-runtime` to
+check the version guard. The suite's global setup rejects Chrome older than
+156.0.8078.79 (CVE-2026-76024) before loading test pages. Playwright 1.64.1's bundled
+Chromium 156.0.8078.4 does not meet this floor. Project names and snapshot paths
+remain `chromium`.
+
+`PLAYWRIGHT_CHROME_EXECUTABLE_PATH` can select an explicitly provisioned Chrome
+for Testing executable; its actual reported version must pass the same guard.
+There is no fallback to bundled Chromium. macOS uses its installed Chrome and
+Chromium sandbox. No browser CI is configured in this repository; install and update Chrome on
+the machine running the suite.
+Revisit the temporary browser choice when a stable Playwright browser manifest
+includes the fix; qualify that browser through the consumer tests before changing
+back. This version floor addresses the named CVE, not all future browser advisories.
