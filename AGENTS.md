@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Compendium is the Influence Index: a static editorial field guide to people who
+The Influence Index is a static editorial field guide to people who
 shaped industries, institutions, and culture. It uses Next.js App Router, React,
 TypeScript, and Tailwind. Content and portraits live in the repository; there is
 no database or external content service. The former one-pager/PDF Library has

@@ -20,7 +20,7 @@ export function ArchiveNav() {
       <div className="wrap topbar">
         <Link className="brand" href="/" aria-label="The Influence Index home">
           <Image src="/content/influence/index-mark.svg" alt="" width={31} height={31} unoptimized />
-          <span>COMPENDIUM<span className="brand-dim">/INDEX</span></span>
+          <span>INFLUENCE<span className="brand-dim">/INDEX</span></span>
         </Link>
         <nav aria-label="Archive views">
           {sections.map(({ href, label }) => (

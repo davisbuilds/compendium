@@ -1,6 +1,6 @@
 # Architecture
 
-Compendium is one Next.js App Router application. The Influence Index is its only
+The Influence Index is one Next.js App Router application with a single editorial
 content surface. `src/app/layout.tsx` owns the document and metadata defaults;
 `src/app/(index)/layout.tsx` owns the masthead, skip link, reading area, and footer.
 The route group does not appear in URLs.
