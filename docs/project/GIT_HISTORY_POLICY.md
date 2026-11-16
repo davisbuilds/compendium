@@ -1,10 +1,10 @@
 # Git History and Branch Hygiene
 
-Last verified: September 27, 2026 (merge settings); October 11, 2026 (branch protection)
+Last verified: November 16, 2026 (merge settings and branch protection)
 
 ## Repository Merge Settings
 
-Observed via `gh api repos/davisbuilds/compendium` on 2026-09-27 (public repository). Re-query mutable settings before relying on them:
+Observed via `gh api repos/davisbuilds/influence-index` on 2026-11-16 (public repository). Re-query mutable settings before relying on them:
 
 - `allow_squash_merge`: `true`
 - `allow_merge_commit`: `false`
@@ -36,8 +36,8 @@ Check relevant UI changes in a real browser before delivery.
 
 ## Branch Protection
 
-Verified 2026-10-11 with
-`gh api repos/davisbuilds/compendium/branches/main/protection`:
+Verified 2026-11-16 with
+`gh api repos/davisbuilds/influence-index/branches/main/protection`:
 `main` requires these GitHub Actions checks before merge:
 
 - `Lint, dead code, and build` (CI)

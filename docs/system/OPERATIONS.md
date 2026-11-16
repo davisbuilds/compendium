@@ -94,10 +94,6 @@ comparisons render on the server; preserve a Next.js runtime rather than using a
 static-export deployment. Verify the deployed directory, profile, field note,
 timeline, and comparison before claiming it is healthy.
 
-The project/GitHub rename to `influence-index` is planned after this overhaul
-lands; [Roadmap](../project/ROADMAP.md) owns that follow-up. Until then, clone URLs
-and package identity remain `compendium`.
-
 ## Troubleshooting
 
 | Symptom | Check |

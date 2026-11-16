@@ -25,6 +25,8 @@ test("directory search combines with field filters and recovers from empty resul
 test("Index navigation exposes the archive without Library links", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1, name: "The Influence Index" })).toBeVisible();
+  await expect(page).toHaveTitle("The Influence Index");
+  await expect(page.getByRole("link", { name: "The Influence Index home" })).toHaveText("INFLUENCE/INDEX");
   const navigation = page.getByRole("navigation", { name: "Archive views" });
   await expect(navigation.getByRole("link", { name: "People", exact: true })).toHaveAttribute("href", "/");
   await expect(navigation.getByRole("link", { name: "Themes", exact: true })).toHaveAttribute("href", "/themes");
@@ -38,6 +40,7 @@ test("Index navigation exposes the archive without Library links", async ({ page
 test("profiles retain sources and comparison without one-pager links", async ({ page }) => {
   await page.goto("/people/paul-graham");
   await expect(page.getByRole("heading", { name: "Paul Graham", exact: true, level: 1 })).toBeVisible();
+  await expect(page).toHaveTitle("Paul Graham · Influence Index");
   await page.getByText(/^Sources \d+$/).click();
   await expect(page.locator(".profile-sources .sources a").first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Compare with someone" })).toHaveAttribute("href", "/compare?left=paul-graham");

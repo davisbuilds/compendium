@@ -6,7 +6,7 @@ import { directoryEntry, fieldFilters, fieldFor, peopleBySlug } from "@/lib/infl
 import { compareHref } from "@/lib/influence/format";
 
 export const metadata = {
-  title: "The Influence Index",
+  title: { absolute: "The Influence Index" },
   description: "An illustrated field guide to people who shaped industries, institutions, and culture.",
 };
 
@@ -52,7 +52,7 @@ export default function HomePage() {
   return (
     <>
       <section className="hero window" aria-labelledby="home-title">
-        <Titlebar>Compendium</Titlebar>
+        <Titlebar>Influence Index</Titlebar>
         <div className="hero-inner">
           <div className="hero-copy">
             <span className="kicker">A Davis Builds field guide</span>

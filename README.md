@@ -1,4 +1,4 @@
-# Compendium — The Influence Index
+# The Influence Index
 
 A retro field guide to people who shaped industries, institutions, and culture.
 Browse illustrated profiles, explore career milestones, compare two people, and
@@ -13,6 +13,8 @@ service are required.
 Use Node.js 24 and the pnpm version declared in `package.json`.
 
 ```bash
+git clone https://github.com/davisbuilds/influence-index.git
+cd influence-index
 pnpm install --frozen-lockfile
 pnpm dev
 ```
