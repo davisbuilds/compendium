@@ -94,6 +94,35 @@ comparisons render on the server; preserve a Next.js runtime rather than using a
 static-export deployment. Verify the deployed directory, profile, field note,
 timeline, and comparison before claiming it is healthy.
 
+### Vercel
+
+The Vercel project is `influence-index` in the `davisbuilds-projects` team. It uses
+Next.js and Node.js 24.x, with framework-default build/install commands and the
+pnpm version pinned by `package.json`. No application secrets are required.
+
+From a clean checkout at the intended commit:
+
+```bash
+vc link --yes --project influence-index --scope davisbuilds-projects
+vc deploy --dry --json
+vc deploy --prod --yes --scope davisbuilds-projects
+```
+
+Review the dry-run file manifest before uploading. `.vercelignore` excludes local
+browser reports and other verification output; CLI deployments do not inherit
+all Git ignore rules. The CLI-created `.vercel/` project link and local environment
+files stay untracked. See [Vercel's file-exclusion reference](https://vercel.com/docs/deployments/vercel-ignore).
+
+After deployment, inspect its production aliases and source commit with `vc inspect`.
+Run the application browser suite against the public production alias:
+
+```bash
+PLAYWRIGHT_APP_BASE_URL=https://REPLACE_WITH_PRODUCTION_HOST pnpm exec playwright test --config scripts/app-browser.config.ts
+```
+
+Use the actual alias reported by Vercel; a ready build is not proof that the
+public URL or server-rendered comparison route works.
+
 ## Troubleshooting
 
 | Symptom | Check |
