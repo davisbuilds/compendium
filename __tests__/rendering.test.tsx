@@ -4,16 +4,16 @@ import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import CategoryPage from "../src/app/category/[category]/page";
-import HomePage from "../src/app/page";
+import CategoryPage from "../src/app/(library)/category/[category]/page";
+import LibraryPage from "../src/app/(library)/library/page";
 import { Button } from "../src/components/ui/button";
 import { Badge } from "../src/components/ui/badge";
 import { categories, getContentByCategory, personas, templates } from "../src/lib/content";
 
-test("home page renders category, persona, and template navigation", () => {
-  const html = renderToStaticMarkup(<HomePage />);
+test("library page renders category, persona, and template navigation", () => {
+  const html = renderToStaticMarkup(<LibraryPage />);
 
-  assert.match(html, />Compendium</);
+  assert.match(html, />Compendium Library</);
   assert.match(html, new RegExp(`href="/category/${categories[0].id}"`));
   assert.match(html, new RegExp(`href="/persona/${personas[0].slug}"`));
   assert.match(
@@ -47,7 +47,7 @@ test("category page renders a not found state for unknown categories", async () 
 
   assert.match(html, /Category not found/);
   assert.match(html, /href="\//);
-  assert.match(html, /Back to Home/);
+  assert.match(html, /Back to Library/);
 });
 
 test("button and badge variants render their selected styles and content", () => {

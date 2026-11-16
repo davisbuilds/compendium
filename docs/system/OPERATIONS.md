@@ -35,12 +35,20 @@ Triggers:
 Required checks:
 
 - `pnpm lint`
+- `pnpm test:unit`
 - `pnpm test:dead-code`
 - `pnpm build`
 
 CI uses Node.js 24 and `pnpm install --frozen-lockfile`.
 
 ## Adding Content
+
+### Influence Index profile or field note
+
+1. Add the profile or note to `src/lib/influence/archive.ts`.
+2. For a profile, add its portrait at `public/content/influence/<slug>.webp` and preserve the square aspect ratio. Use a unique ID and slug and at least one dated milestone.
+3. Include sources for quotations and fun facts. In each field note, use profile slugs from the same archive.
+4. Run `pnpm test` and `pnpm build` to check the data and route generation.
 
 ### New persona
 

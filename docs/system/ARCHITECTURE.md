@@ -1,72 +1,29 @@
 # Architecture
 
-## High-Level Flow
+Compendium uses one Next.js App Router application with two route groups. Both
+use the root document layout. The Influence Index has its own masthead and
+scoped stylesheet. The original Library pages share the existing sidebar.
 
-1. Content data (personas and templates) is defined as hardcoded arrays in `src/lib/content.ts`.
-2. App Router pages read content data and render server-side with client-side interactive components.
-3. Sidebar provides persistent navigation across all routes.
-4. Static assets (images, PDFs) live in `public/content/` and are served directly.
+| URL | Route group | Content |
+| --- | --- | --- |
+| `/` | `(index)` | Featured comparison and searchable directory |
+| `/people/[slug]` | `(index)` | Profile, sources, milestones, and related links |
+| `/themes`, `/themes/[slug]` | `(index)` | Field notes and their linked profiles |
+| `/timeline` | `(index)` | Milestone browser |
+| `/compare?left=…&right=…` | `(index)` | Two profiles selected by slug |
+| `/about` | `(index)` | Editorial and illustration notes |
+| `/library` | `(library)` | Original Compendium landing page |
+| `/persona/[slug]` | `(library)` | One-pagers in the existing image viewer |
+| `/category/[category]` | `(library)` | Original category browse pages |
+| `/template/[slug]` | `(library)` | Downloadable PDFs in the existing viewer |
 
-## App Router Structure
+The archive lives in `src/lib/influence/archive.ts` and is checked against the
+schema in `src/lib/influence/types.ts`. The repository serves pixel portraits
+directly from `public/content/influence/<slug>.webp`. The build prerenders known
+profile and field-note routes. Directory, timeline, and comparison controls use
+TypeScript Client Components. The compare page renders the selected pair on the
+server from its URL query. Neither surface needs a database or a CMS.
 
-Uses `src/` directory with `@/` path alias.
-
-| Route | File | Type | Purpose |
-|-------|------|------|---------|
-| `/` | `src/app/page.tsx` | SSR | Home with persona grid, templates, and categories |
-| `/persona/[slug]` | `src/app/persona/[slug]/page.tsx` | SSR + Client | Persona detail with image slideshow |
-| `/category/[category]` | `src/app/category/[category]/page.tsx` | SSR | Category-filtered content grid |
-| `/template/[slug]` | `src/app/template/[slug]/page.tsx` | Client | PDF template viewer |
-
-Layout (`src/app/layout.tsx`) wraps all routes with the Sidebar component and dark mode default.
-
-## Content Data Model
-
-`src/lib/content.ts` exports:
-
-- `personas`: Array of `Persona` objects (id, name, slug, description, avatar, content items).
-- `templates`: Array of `Template` objects (filename, title, description).
-- `categories`: 8 categories with display names and color schemes.
-- Helper functions: `getPersonaBySlug()`, `getContentByCategory()`, `getAllCategories()`.
-
-Categories: `productivity`, `success`, `startups`, `fundraising`, `hiring`, `career`, `life-advice`, `communication`.
-
-No CMS or database — all content is static and checked into the repo.
-
-## Components
-
-| Component | File | Role |
-|-----------|------|------|
-| `Sidebar` | `src/components/Sidebar.tsx` | Fixed desktop + mobile sheet navigation |
-| `ImageSlideshow` | `src/components/ImageSlideshow.tsx` | Swiper-based carousel with zoom/pan |
-| `PdfViewer` | `src/components/PdfViewer.tsx` | PDF document viewer with page navigation |
-| `PixelAvatar` | `src/components/PixelAvatar.tsx` | Pixel art avatar display with bob animation |
-
-UI primitives (shadcn-style): `badge.tsx`, `button.tsx`, `sheet.tsx`.
-
-## Static Assets
-
-```text
-public/content/
-├── personas/
-│   ├── daniel-gross/         # avatar.png + content images
-│   ├── elon-musk/
-│   ├── marc-andreessen/
-│   ├── nat-friedman/
-│   ├── naval-ravikant/
-│   ├── paul-graham/
-│   ├── sam-altman/
-│   └── tim-ferriss/
-└── templates/
-    ├── PersonalPlanner.pdf
-    └── TimeBoxTemplate.pdf
-```
-
-## Directory Map
-
-```text
-src/app/                  # Routes and layouts
-src/components/           # Feature components + ui/ primitives
-src/lib/                  # Content data and utilities
-public/content/           # Static images and PDFs
-```
+Library data stays in `src/lib/content.ts` with persona slides and avatars in
+`public/content/personas/<slug>/` and PDFs in `public/content/templates/`.
+A matching one-pager slug links to its profile and vice versa.

@@ -2,7 +2,7 @@
 
 Guidance for coding agents working in this repository.
 
-Curated one-pagers, templates, and advice from entrepreneurs/technologists. Next.js 16 + React 19 + Tailwind 4 + TypeScript.
+The Influence Index and a library of original one-pagers and templates. Next.js 16 + React 19 + Tailwind 4 + TypeScript.
 
 ## Documentation Map
 
@@ -28,23 +28,26 @@ pnpm test:dead-code # static unreferenced export/file check
 
 | Purpose | Location |
 | :----- | :----- |
-| Content data (all personas, templates, categories) | `src/lib/content.ts` |
-| Root layout + dark mode + sidebar shell | `src/app/layout.tsx` |
+| Influence Index profiles and field notes | `src/lib/influence/archive.ts` |
+| Library personas, templates, and categories | `src/lib/content.ts` |
+| Root document | `src/app/layout.tsx` |
+| Index and Library shells | `src/app/(index)/layout.tsx`, `src/app/(library)/layout.tsx` |
 | Sidebar navigation (mobile sheet + desktop fixed) | `src/components/Sidebar.tsx` |
 | Image slideshow with zoom/pan | `src/components/ImageSlideshow.tsx` |
 | PDF viewer with page nav + zoom | `src/components/PdfViewer.tsx` |
 | Pixel avatar with fallback | `src/components/PixelAvatar.tsx` |
-| Home page | `src/app/page.tsx` |
-| Persona detail page | `src/app/persona/[slug]/page.tsx` |
-| Template viewer page | `src/app/template/[slug]/page.tsx` |
-| Category listing page | `src/app/category/[category]/page.tsx` |
+| Index homepage | `src/app/(index)/page.tsx` |
+| Library homepage | `src/app/(library)/library/page.tsx` |
+| Persona detail page | `src/app/(library)/persona/[slug]/page.tsx` |
+| Template viewer page | `src/app/(library)/template/[slug]/page.tsx` |
+| Category listing page | `src/app/(library)/category/[category]/page.tsx` |
 
 ## Architecture
 
 - **App Router** with `src/` directory, `@/` path alias
-- **Content data** lives in `src/lib/content.ts` (hardcoded arrays, no CMS)
+- **Content data** lives in the typed archive and Library modules (no CMS).
 - **Static assets** in `public/content/personas/<slug>/` (images) and `public/content/templates/` (PDFs)
-- **Routes**: `/` (home), `/persona/[slug]`, `/category/[category]`, `/template/[slug]`
+- **Routes**: see the [route map](docs/system/ARCHITECTURE.md).
 - **Dark mode** is the only theme — no light/dark toggle
 
 ## Testing
@@ -54,6 +57,8 @@ pnpm test:dead-code # static unreferenced export/file check
 - **E2E**: `pnpm exec playwright test` for browser-based end-to-end UI testing.
 
 ## Adding Content
+
+For the Influence Index, use the [archive workflow](docs/system/OPERATIONS.md#influence-index-profile-or-field-note). For the Library:
 
 1. Add image/PDF to `public/content/personas/<slug>/` or `public/content/templates/`
 2. Add `avatar.png` to `public/content/personas/<slug>/` (required per persona)
@@ -68,7 +73,7 @@ pnpm test:dead-code # static unreferenced export/file check
 
 3. **`ContentItem.type` controls rendering**: `"image"` items go through `ImageSlideshow`, `"pdf"` items are handled separately. No other types are supported.
 
-4. **No runtime data fetching**: All content is static and hardcoded in `content.ts`. Adding content requires a code change and rebuild.
+4. **No runtime data fetching**: Content is checked into the repository. Adding content requires a code change and rebuild.
 
 ## Conventions
 

@@ -47,7 +47,7 @@ function SidebarContent({ onNavigate }: SidebarContentProps) {
     <div className="flex h-full flex-col">
       {/* Logo/Title */}
       <div className="flex h-14 items-center border-b px-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold" onClick={onNavigate}>
+        <Link href="/library" className="flex items-center gap-2 font-semibold" onClick={onNavigate}>
           <span className="text-xl">Compendium</span>
         </Link>
       </div>
@@ -57,13 +57,14 @@ function SidebarContent({ onNavigate }: SidebarContentProps) {
         {/* Home */}
         <div className="mb-6">
           <NavItem
-            href="/"
+            href="/library"
             icon={<Home className="h-4 w-4" />}
-            isActive={pathname === "/"}
+            isActive={pathname === "/library"}
             onClick={onNavigate}
           >
-            Home
+            Library
           </NavItem>
+          <NavItem href="/" onClick={onNavigate}>The Influence Index ↗</NavItem>
         </div>
 
         {/* Personas */}
@@ -138,7 +139,7 @@ export function Sidebar() {
             <SidebarContent onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>
-        <Link href="/" className="font-semibold">
+        <Link href="/library" className="font-semibold">
           Compendium
         </Link>
       </div>

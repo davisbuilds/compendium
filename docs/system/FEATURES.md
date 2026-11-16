@@ -2,6 +2,14 @@
 
 Product-surface reference for Compendium.
 
+## Influence Index
+
+- The homepage has a searchable portrait directory, field filters, and three sort orders.
+- Profile pages pair key ideas and motivations with sourced quotes, career milestones, and fun facts.
+- Field notes connect people across industries. The timeline groups milestones by century or decade and filters by field.
+- The compare view puts two profiles side by side. The URL stores the selection for sharing.
+- The Library link opens the original one-pagers and PDF templates.
+
 ## Persona Pages
 
 - Image slideshows of one-pager advice from entrepreneurs and technologists.
@@ -24,9 +32,8 @@ Product-surface reference for Compendium.
 
 ## Navigation
 
-- Desktop: Fixed sidebar with persona list and category links.
-- Mobile: Hamburger menu opening a slide-out sheet.
-- Sidebar shows all personas and category filters.
+- The Index masthead links to People, Themes, Timeline, Compare, and Library.
+- The Library uses its fixed desktop sidebar and mobile menu for one-pagers and templates.
 
 ## Personas
 
