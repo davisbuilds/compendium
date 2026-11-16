@@ -1,0 +1,6 @@
+# Local verification artifacts are not deployment inputs.
+playwright-report
+test-results
+blob-report
+coverage
+output
