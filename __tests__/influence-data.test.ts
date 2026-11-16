@@ -15,6 +15,11 @@ test("archive profiles resolve to portraits and field notes resolve to profiles"
   for (const person of people) {
     assert.ok(fieldIds.has(person.category), person.slug);
     assert.ok(person.milestones.length > 0, person.slug);
+    assert.ok(person.milestones.every((event) => Number.isFinite(event.year)), person.slug);
+    for (const source of [...person.sources, ...person.ideaSources, person.quote, person.funFactSource]) {
+      assert.ok(source.label.trim(), person.slug);
+      assert.ok(["https:", "http:"].includes(new URL(source.url).protocol), person.slug);
+    }
     assert.ok(existsSync(`public/content/influence/${person.slug}.webp`), person.slug);
   }
 

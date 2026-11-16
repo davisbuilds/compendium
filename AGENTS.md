@@ -1,84 +1,67 @@
 # AGENTS.md
 
-Guidance for coding agents working in this repository.
-
-The Influence Index and a library of original one-pagers and templates. Next.js 16 + React 19 + Tailwind 4 + TypeScript.
+Compendium is the Influence Index: a static editorial field guide to people who
+shaped industries, institutions, and culture. It uses Next.js App Router, React,
+TypeScript, and Tailwind. Content and portraits live in the repository; there is
+no database or external content service. The former one-pager/PDF Library has
+been removed. Do not restore its routes, assets, or dependencies.
 
 ## Documentation Map
 
-- `CONTRIBUTING.md` — contribution scope, review expectations, and delivery policy.
-- `docs/system/ARCHITECTURE.md` — high-level flow, App Router structure, content data model, components, static-asset conventions, directory map.
-- `docs/system/FEATURES.md` — persona/template/category pages, navigation, persona roster, dark mode.
-- `docs/system/OPERATIONS.md` — local dev, commands, env vars, CI, adding content (persona/template/category), deployment.
-- `docs/project/ROADMAP.md` — current direction and product scope.
-- `docs/project/BACKLOG.md` — future-only durable follow-ups.
-- `docs/project/GIT_HISTORY_POLICY.md` — merge strategy and branch hygiene.
+- [Architecture](docs/system/ARCHITECTURE.md) — routing, data ownership, and rendering boundaries.
+- [Features](docs/system/FEATURES.md) — reader capabilities and semantic limits.
+- [Operations](docs/system/OPERATIONS.md) — setup, content editing, checks, and deployment.
+- [Roadmap](docs/project/ROADMAP.md) — selected direction; [Backlog](docs/project/BACKLOG.md) — unresolved candidates.
+- [Contributing](CONTRIBUTING.md) — contribution and review expectations; [Git policy](docs/project/GIT_HISTORY_POLICY.md) — merge and branch policy.
 
-## Commands
+## Setup And Checks
 
-```bash
-pnpm dev    # dev server on :3000
-pnpm build  # production build
-pnpm lint   # eslint
-pnpm test:unit      # node:test suite (content/rendering/utils)
-pnpm test:dead-code # static unreferenced export/file check
-```
+Use Node.js 24 and the pnpm version in `package.json`. Install with
+`pnpm install --frozen-lockfile`; use `pnpm dev` for local development.
 
-## Key Files Reference
+Before pushing, run `pnpm test` (lint, unit tests, dead-code check) and
+`pnpm build`. For UI/routing work, run `pnpm test:browser` and the relevant manual
+checks in [Operations](docs/system/OPERATIONS.md#application-browser-verification).
+`pnpm test:browser-runtime` verifies only the Chrome guard and an isolated DOM
+interaction. Push only when explicitly asked.
 
-| Purpose | Location |
-| :----- | :----- |
-| Influence Index profiles and field notes | `src/lib/influence/archive.ts` |
-| Library personas, templates, and categories | `src/lib/content.ts` |
-| Root document | `src/app/layout.tsx` |
-| Index and Library shells | `src/app/(index)/layout.tsx`, `src/app/(library)/layout.tsx` |
-| Sidebar navigation (mobile sheet + desktop fixed) | `src/components/Sidebar.tsx` |
-| Image slideshow with zoom/pan | `src/components/ImageSlideshow.tsx` |
-| PDF viewer with page nav + zoom | `src/components/PdfViewer.tsx` |
-| Pixel avatar with fallback | `src/components/PixelAvatar.tsx` |
-| Index homepage | `src/app/(index)/page.tsx` |
-| Library homepage | `src/app/(library)/library/page.tsx` |
-| Persona detail page | `src/app/(library)/persona/[slug]/page.tsx` |
-| Template viewer page | `src/app/(library)/template/[slug]/page.tsx` |
-| Category listing page | `src/app/(library)/category/[category]/page.tsx` |
+Use red/green TDD for substantial behavior changes. The red test must fail on the
+behavior being fixed, not just a missing symbol. For smaller changes, run the
+relevant existing checks.
 
-## Architecture
+## Source Entry Points
 
-- **App Router** with `src/` directory, `@/` path alias
-- **Content data** lives in the typed archive and Library modules (no CMS).
-- **Static assets** in `public/content/personas/<slug>/` (images) and `public/content/templates/` (PDFs)
-- **Routes**: see the [route map](docs/system/ARCHITECTURE.md).
-- **Dark mode** is the only theme — no light/dark toggle
+| Responsibility | Source |
+| --- | --- |
+| Profiles, fields, and field notes | `src/lib/influence/archive.ts`; schema in `types.ts` |
+| Derived lookups, filters, and directory payload | `src/lib/influence/data.ts`; shared formatting in `format.ts` |
+| Pages and scoped design styles | `src/app/(index)/` |
+| Interactive directory, timeline, comparison, navigation | `src/components/influence/` |
+| Root document, shared CSS, and metadata defaults | `src/app/layout.tsx`, `src/app/globals.css` |
+| Application browser checks | `tests/`; see Operations for the entry point |
 
-## Testing
+## Boundaries To Preserve
 
-- **Pre-push check**: Before pushing to the remote, run `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build`.
-- **TDD**: red/green for new features, major refactors, and large changes. The red step must fail for the behavior you're about to fix — a test that fails only because the symbol doesn't exist yet is a stub, not a red test; write the signature first, then a test that fails on the behavior. Skip the red step for code with no behavior to assert, and cover it after. For smaller edits, still run the relevant existing tests before wrapping up.
-- **E2E**: `pnpm exec playwright test` for browser-based end-to-end UI testing.
-
-## Adding Content
-
-For the Influence Index, use the [archive workflow](docs/system/OPERATIONS.md#influence-index-profile-or-field-note). For the Library:
-
-1. Add image/PDF to `public/content/personas/<slug>/` or `public/content/templates/`
-2. Add `avatar.png` to `public/content/personas/<slug>/` (required per persona)
-3. Update the `personas` or `templates` array in `src/lib/content.ts`
-4. Categories: productivity, success, startups, fundraising, hiring, career, life-advice, communication
-
-## Implementation Gotchas
-
-1. **Asset paths are convention-driven**: Persona images at `public/content/personas/<slug>/<filename>`, templates at `public/content/templates/<filename>`, avatars at `public/content/personas/<slug>/avatar.png`. Filenames are case-sensitive — match exactly what's in `content.ts`.
-
-2. **Template slug ↔ filename coupling**: Sidebar links strip `.pdf` from `template.filename`, and the template page reverses this to look up the template. Filenames in `content.ts` must end with `.pdf`.
-
-3. **`ContentItem.type` controls rendering**: `"image"` items go through `ImageSlideshow`, `"pdf"` items are handled separately. No other types are supported.
-
-4. **No runtime data fetching**: Content is checked into the repository. Adding content requires a code change and rebuild.
-
-## Conventions
-
-- pnpm (not npm/yarn)
-- Tailwind utility classes, dark mode via `dark:` variants
+- `(index)` is a route group, not part of the URL. The homepage is `/`; profiles
+  use `/people/[slug]`. The former `/library`, `/persona/*`, `/category/*`, and
+  `/template/*` URLs and their assets intentionally return 404.
+- Profile and field-note routes are generated from archive slugs. Keep IDs/slugs
+  unique, milestone years finite, field IDs valid, and field-note profile
+  references resolvable. Slug changes also affect featured/default comparisons,
+  shared URLs, and portrait paths; search all consumers before changing them.
+- Portraits are square `public/content/influence/<slug>.webp` files. Match filename
+  case exactly. Keep the Index mark in `public/content/influence/index-mark.svg`
+  and its app-icon copy at `src/app/icon.svg` consistent.
+- Keep the full editorial archive on the server. Directory/timeline/compare controls
+  receive their required projections. Comparisons use `left` and `right` slug
+  query parameters and must survive a reload or shared link.
+- Content edits require a rebuild. Preserve sources for quotes, ideas, and fun
+  facts, and disclose generated portraits and historical reconstructions.
+  Structural tests do not establish factual accuracy or publication rights;
+  follow [Operations](docs/system/OPERATIONS.md#adding-content).
+- The Index has one dark theme. Keep its design tokens and CSS scoped under
+  `.influence-index`; root defaults also cover framework not-found pages. There
+  is no theme toggle.
 
 ## Working Agreement
 

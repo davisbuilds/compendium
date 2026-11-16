@@ -60,7 +60,6 @@ export default function HomePage() {
             <p>{archive.people.length} profiles of people who shaped industries, institutions, and culture. Explore what they built and how their ideas scaled.</p>
             <div className="actions">
               <a className="btn btn-primary" href="#directory">Browse the index <span aria-hidden="true">↓</span></a>
-              <Link className="btn" href="/library">One-pagers and templates <span aria-hidden="true">↗</span></Link>
             </div>
           </div>
           <section className="featured-pair" aria-labelledby="pair-title">

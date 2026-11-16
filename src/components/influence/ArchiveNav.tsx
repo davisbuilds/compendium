@@ -9,7 +9,6 @@ const sections = [
   { href: "/themes", label: "Themes" },
   { href: "/timeline", label: "Timeline" },
   { href: "/compare", label: "Compare" },
-  { href: "/library", label: "Library" },
 ];
 
 export function ArchiveNav() {

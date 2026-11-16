@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { accentStyle, PersonCard, Portrait, SourceList, Titlebar } from "@/components/influence/ArchiveUI";
 import { FunFact, Ideas, Milestones, ProfileQuote } from "@/components/influence/ProfileContent";
-import { getPersonaBySlug } from "@/lib/content";
 import { archive } from "@/lib/influence/archive";
 import { fieldFor, peopleBySlug } from "@/lib/influence/data";
 import { compareHref } from "@/lib/influence/format";
@@ -67,7 +66,6 @@ export default async function InfluenceProfile({ params }: ProfilePageProps) {
             <h2>Career timeline</h2>
             <Milestones person={person} />
             <Link className="btn" href={compareHref(slug)}>Compare with someone <span aria-hidden="true">↗</span></Link>
-            {getPersonaBySlug(slug) && <Link className="btn" href={`/persona/${slug}`}>Read the one-pagers ↗</Link>}
             {notes.length > 0 && (
               <>
                 <h2>Related field notes</h2>

@@ -12,7 +12,6 @@ export default function InfluenceLayout({ children }: { children: ReactNode }) {
       <footer className="wrap footer">
         <Link className="footer-name" href="/">THE INFLUENCE INDEX</Link>
         <div className="footer-links">
-          <Link href="/library">Compendium library</Link>
           <Link href="/about">About the archive <span aria-hidden="true">↗</span></Link>
         </div>
       </footer>

@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "Compendium", template: "%s · Compendium" },
-  description: "The Influence Index and the Compendium library of one-pagers and templates.",
+  description: "The Influence Index: an illustrated field guide to people who shaped industries, institutions, and culture.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

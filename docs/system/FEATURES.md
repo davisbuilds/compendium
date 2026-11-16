@@ -1,54 +1,38 @@
 # Features
 
-Product-surface reference for Compendium.
-
 ## Influence Index
 
-- The homepage has a searchable portrait directory, field filters, and three sort orders.
-- Profile pages pair key ideas and motivations with sourced quotes, career milestones, and fun facts.
-- Field notes connect people across industries. The timeline groups milestones by century or decade and filters by field.
-- The compare view puts two profiles side by side. The URL stores the selection for sharing.
-- The Library link opens the original one-pagers and PDF templates.
+The homepage is a portrait directory of people who shaped industries,
+institutions, and culture. Search matches words across names, roles, biography,
+ideas, tags, quotes, and milestones, ignoring case and accents. Field filters
+combine with search; sorting uses first milestone, surname, or newest milestone.
+The `/` key focuses search outside editable controls. Directory filters are local
+page state, not shareable URL state.
 
-## Persona Pages
+Profiles present ideas, motivations, impact, sourced quotes and fun facts, career
+milestones, related profiles, and field notes. Their source list combines and
+deduplicates the profile's source URLs.
 
-- Image slideshows of one-pager advice from entrepreneurs and technologists.
-- Swiper-based carousel with touch/swipe support.
-- Zoom and pan controls via `react-zoom-pan-pinch`.
-- Pixel art avatars for each persona.
+Field notes connect profiles through a shared problem and a reflection prompt.
+The timeline orders all milestones by year, groups early dates by century and
+modern dates by decade, and filters by field. Approximate dates are marked;
+pre-common-era dates use BCE.
 
-## Template Pages
+Comparison displays two profiles side by side. The `left` and `right` slug query
+parameters preserve the selection for reloads and sharing. Missing or unknown
+slugs fall back to valid defaults. The view compares editorial content; it does
+not rank people or calculate an influence score.
 
-- PDF viewer for downloadable templates.
-- Page navigation and zoom controls.
-- Templates: Personal Planner, TimeBox Template.
+Portraits are generated editorial illustrations; ancient portraits are artistic
+reconstructions. Quotes and fun facts link to sources. Automated integrity checks
+validate structure and references, not the truth or completeness of the writing.
 
-## Category Browsing
+## Navigation And Appearance
 
-- Filter personas by category.
-- 8 categories with color-coded badges:
-  - Productivity, Success, Startups, Fundraising
-  - Hiring, Career, Life Advice, Communication
+The masthead links to People, Themes, Timeline, and Compare. The footer and byline
+link to About. A skip link moves keyboard focus to the reading area. The app uses
+a dark editorial theme, adapts to narrow screens, and has no theme toggle.
 
-## Navigation
-
-- The Index masthead links to People, Themes, Timeline, Compare, and Library.
-- The Library uses its fixed desktop sidebar and mobile menu for one-pagers and templates.
-
-## Personas
-
-| Persona | Content Items |
-|---------|--------------|
-| Daniel Gross | 1 |
-| Elon Musk | 2 |
-| Marc Andreessen | 4 |
-| Nat Friedman | 1 |
-| Naval Ravikant | 1 |
-| Paul Graham | 2 |
-| Sam Altman | 3 |
-| Tim Ferriss | 1 |
-
-## Dark Mode
-
-- Dark mode is the default theme.
-- Tailwind `dark:` variants for theme-aware styling.
+Content is repository-authored and available without an account. No CMS,
+database, or external content API is required. Adding content requires a rebuild.
+The former Library, one-pagers, and PDF templates have been retired.
