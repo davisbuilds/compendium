@@ -25,4 +25,5 @@ Fix simple, quick, or blocking issues inline when within the active task's scope
 
 ## Open
 
-_No open items yet._
+_No unselected follow-ups currently recorded. The post-merge project/repository
+rename is selected direction in [Roadmap](ROADMAP.md)._

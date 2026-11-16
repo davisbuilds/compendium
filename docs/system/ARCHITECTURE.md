@@ -1,72 +1,46 @@
 # Architecture
 
-## High-Level Flow
+Compendium is one Next.js App Router application. The Influence Index is its only
+content surface. `src/app/layout.tsx` owns the document and metadata defaults;
+`src/app/(index)/layout.tsx` owns the masthead, skip link, reading area, and footer.
+The route group does not appear in URLs.
 
-1. Content data (personas and templates) is defined as hardcoded arrays in `src/lib/content.ts`.
-2. App Router pages read content data and render server-side with client-side interactive components.
-3. Sidebar provides persistent navigation across all routes.
-4. Static assets (images, PDFs) live in `public/content/` and are served directly.
+| URL | Responsibility |
+| --- | --- |
+| `/` | Featured pairing and searchable profile directory |
+| `/people/[slug]` | Profile, sources, milestones, and related links |
+| `/themes`, `/themes/[slug]` | Field notes and linked profiles |
+| `/timeline` | Milestone browser |
+| `/compare?left=…&right=…` | Two profiles selected by slug |
+| `/about` | Editorial and illustration notes |
 
-## App Router Structure
+The former Library routes (`/library`, `/persona/*`, `/category/*`, `/template/*`),
+assets, viewers, and content tooling are removed. Those URLs return 404; there is
+no compatibility shell or redirect to unrelated content.
 
-Uses `src/` directory with `@/` path alias.
+## Content Ownership
 
-| Route | File | Type | Purpose |
-|-------|------|------|---------|
-| `/` | `src/app/page.tsx` | SSR | Home with persona grid, templates, and categories |
-| `/persona/[slug]` | `src/app/persona/[slug]/page.tsx` | SSR + Client | Persona detail with image slideshow |
-| `/category/[category]` | `src/app/category/[category]/page.tsx` | SSR | Category-filtered content grid |
-| `/template/[slug]` | `src/app/template/[slug]/page.tsx` | Client | PDF template viewer |
+`src/lib/influence/archive.ts` contains the editorial archive, typed by
+`types.ts`. `data.ts` owns slug lookups, field filters, and directory projections;
+`format.ts` owns search normalization, surname sorting, and comparison URLs.
+Portraits are served directly from `public/content/influence/<slug>.webp`.
+The favicon uses the Index mark at `src/app/icon.svg`.
 
-Layout (`src/app/layout.tsx`) wraps all routes with the Sidebar component and dark mode default.
+Archive slugs, field-note references, portrait filenames, featured pairs, and
+comparison defaults must agree. Known profiles and field notes are prerendered;
+unknown slugs return not found. Editorial content is maintained as source and
+requires a rebuild to change; no database or CMS is involved.
 
-## Content Data Model
+## Rendering And Styling
 
-`src/lib/content.ts` exports:
+Server pages pass a searchable directory projection, timeline events, or comparison
+options to Client Components in `src/components/influence/`. Keep full archive
+imports out of client code. Comparison content is rendered on the server from
+`left` and `right` query parameters; missing/invalid values use valid defaults.
 
-- `personas`: Array of `Persona` objects (id, name, slug, description, avatar, content items).
-- `templates`: Array of `Template` objects (filename, title, description).
-- `categories`: 8 categories with display names and color schemes.
-- Helper functions: `getPersonaBySlug()`, `getContentByCategory()`, `getAllCategories()`.
+The app needs a Next.js runtime for query-based comparisons. Checked-in static
+content does not imply an `output: "export"` deployment.
 
-Categories: `productivity`, `success`, `startups`, `fundraising`, `hiring`, `career`, `life-advice`, `communication`.
-
-No CMS or database — all content is static and checked into the repo.
-
-## Components
-
-| Component | File | Role |
-|-----------|------|------|
-| `Sidebar` | `src/components/Sidebar.tsx` | Fixed desktop + mobile sheet navigation |
-| `ImageSlideshow` | `src/components/ImageSlideshow.tsx` | Swiper-based carousel with zoom/pan |
-| `PdfViewer` | `src/components/PdfViewer.tsx` | PDF document viewer with page navigation |
-| `PixelAvatar` | `src/components/PixelAvatar.tsx` | Pixel art avatar display with bob animation |
-
-UI primitives (shadcn-style): `badge.tsx`, `button.tsx`, `sheet.tsx`.
-
-## Static Assets
-
-```text
-public/content/
-├── personas/
-│   ├── daniel-gross/         # avatar.png + content images
-│   ├── elon-musk/
-│   ├── marc-andreessen/
-│   ├── nat-friedman/
-│   ├── naval-ravikant/
-│   ├── paul-graham/
-│   ├── sam-altman/
-│   └── tim-ferriss/
-└── templates/
-    ├── PersonalPlanner.pdf
-    └── TimeBoxTemplate.pdf
-```
-
-## Directory Map
-
-```text
-src/app/                  # Routes and layouts
-src/components/           # Feature components + ui/ primitives
-src/lib/                  # Content data and utilities
-public/content/           # Static images and PDFs
-```
+The Index uses a fixed dark theme with its tokens and styles scoped under
+`.influence-index` in `(index)/influence.css`. Shared Tailwind setup and document
+fallback colors live in `src/app/globals.css`. No light/dark toggle is provided.

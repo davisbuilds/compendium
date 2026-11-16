@@ -2,96 +2,127 @@
 
 ## Local Development
 
+Use Node.js 24 and the pnpm version declared in `package.json`.
+
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`. No application environment variables, secrets,
+database, or external content service are required.
 
-## Useful Commands
+## Verification
 
 ```bash
-pnpm dev            # Dev server
-pnpm build          # Production build
-pnpm start          # Start production server
-pnpm lint           # ESLint
-pnpm test:dead-code # Static unreferenced export/file check
+pnpm test           # Lint, node:test unit tests, and dead-code check
+pnpm build          # Type checking and production route generation
+pnpm test:browser   # Build and run application journeys in installed Chrome
 ```
 
-## Environment Variables
+Lint, unit tests, dead-code checks, and build are the pre-push gates. Run browser
+checks for UI/routing changes. CI runs the four non-browser checks separately on
+pull requests to `main` and pushes to `main`; `.github/workflows/ci.yml` owns its
+toolchain pins and behavior. Publication hygiene and workflow security have their
+own workflows. [Git policy](../project/GIT_HISTORY_POLICY.md) distinguishes CI
+execution from the last observed branch-protection settings.
 
-No environment variables are required. The app runs entirely with static content.
+Unit tests check archive identity, assets, fields, finite milestone years, source
+URL structure, field-note references, and key rendered links/not-found behavior.
+They do not fact-check the writing or exercise browser interactions.
 
-## CI
+### Application Browser Verification
 
-Workflow: `.github/workflows/ci.yml`
+`pnpm test:browser` builds the app, then runs
+`scripts/app-browser.config.ts` against a server it owns on port 3018. The suite
+uses the installed-Chrome guard below, waits for readiness, and shuts down its
+server. An existing process on that port causes failure rather than reuse.
+To inspect a separately started or deployed build, set `PLAYWRIGHT_APP_BASE_URL`
+and invoke `pnpm exec playwright test --config scripts/app-browser.config.ts`;
+that mode does not build, start, or stop the target. Establish which revision is
+served before interpreting results.
 
-Triggers:
+`tests/influence.spec.ts` covers:
 
-- Pull requests to `main`
-- Pushes to `main`
+- Search, field filtering, empty results, recovery, and sorting.
+- Navigation and profile sources/comparison links without retired Library links.
+- Comparison selections surviving URL changes/reload and invalid-input defaults.
+- Field-note links and timeline filters.
+- Narrow mobile layouts without horizontal overflow.
+- Retired Library routes/assets returning 404, with live Index page/portrait
+  positive controls.
 
-Required checks:
+Playwright retains failure traces/screenshots in `test-results/` and an HTML
+report in `playwright-report/`. Use `pnpm exec playwright show-report` to inspect
+it. These generated directories are ignored by Git and lint. The browser-runtime
+smoke command is a separate prerequisite check, not app coverage.
 
-- `pnpm lint`
-- `pnpm test:dead-code`
-- `pnpm build`
-
-CI uses Node.js 24 and `pnpm install --frozen-lockfile`.
+For presentation changes, also inspect screenshots at desktop and mobile widths.
+Check focus visibility and the skip link, portrait loading, source-link context,
+approximate/BCE dates, and readability of long profile/comparison content. The
+suite samples these flows; it is not a full accessibility or editorial audit.
 
 ## Adding Content
 
-### New persona
+1. Edit `src/lib/influence/archive.ts`, following `types.ts`. Use unique profile
+   IDs/slugs, a valid field ID, and at least one finite, dated milestone. Use
+   negative years for BCE and `approx` for approximate dates. Keep milestones
+   chronologically ordered; profile pages preserve their input order.
+2. Add a square portrait at `public/content/influence/<slug>.webp`. Record how
+   illustrations were produced and confirm publication rights for any reference
+   material. Preserve the generated-illustration disclosure in About and any
+   profile-specific reconstruction note.
+3. Supply profile sources, idea sources, quote URL/context, and fun-fact source.
+   Check that the material supports each claim and attribution, including a
+   translator where applicable. A source-shaped URL or green integrity test is
+   not an editorial check.
+4. Field notes refer to existing profile slugs. For slug changes, search notes,
+   featured pairings, comparison defaults, links, and portrait paths together.
+5. Run the checks above, then inspect the affected profile, directory, timeline,
+   field note, and comparison in the browser.
 
-1. Create directory: `public/content/personas/<slug>/`.
-2. Add `avatar.png` and content images.
-3. Ensure filenames match `src/lib/content.ts` exactly, including case.
-4. Add persona entry to the `personas` array in `src/lib/content.ts`.
-5. Assign appropriate categories from: `productivity`, `success`, `startups`, `fundraising`, `hiring`, `career`, `life-advice`, `communication`.
-6. Run `pnpm build` to catch missing static assets and route-generation errors.
-
-### New template
-
-1. Add PDF to `public/content/templates/`.
-2. Add template entry to the `templates` array in `src/lib/content.ts`.
-3. Keep `template.filename` ending in `.pdf`; route slugs are derived from the filename.
-4. Run `pnpm build`.
-
-### New category
-
-1. Add category to the `Category` type union in `src/lib/content.ts`.
-2. Add display name and color scheme to the `categories` object.
+Content changes require a rebuild. A build alone does not prove an asset exists;
+unit tests check registered portraits and browser checks exercise their consumers.
+The original Library content, asset directories, helper scripts, and viewer
+packages are removed. Add new material through the Influence archive workflow.
 
 ## Deployment
 
-- Target platform: Vercel (zero-config with Next.js).
-- No environment variables needed for deployment.
+Build and run as a standard Next.js app (`pnpm build`, then `pnpm start`), or use
+the Next.js integration on Vercel. No application secrets are needed. Query-based
+comparisons render on the server; preserve a Next.js runtime rather than using a
+static-export deployment. Verify the deployed directory, profile, field note,
+timeline, and comparison before claiming it is healthy.
+
+The project/GitHub rename to `influence-index` is planned after this overhaul
+lands; [Roadmap](../project/ROADMAP.md) owns that follow-up. Until then, clone URLs
+and package identity remain `compendium`.
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
-| Persona page 404s | Confirm `slug` in `src/lib/content.ts` matches the route URL. |
-| Image or avatar missing | Confirm file exists under `public/content/personas/<slug>/` and case matches exactly. |
-| Template page 404s | Confirm `template.filename` ends in `.pdf` and exists under `public/content/templates/`. |
-| Dead-code check fails | Remove the unused export/file, add a real reference, or add a documented exception in `scripts/dead-code-check.mjs`. |
-| Build fails during static generation | Check `src/lib/content.ts` for invalid category ids, missing assets, or unsupported `ContentItem.type`. |
+| Profile or field note 404s | Archive slug, static params, and deployed build freshness. |
+| Portrait missing | Exact archive slug, filename case, and `public/content/influence/`. |
+| Compare selection differs on reload | `left`/`right` query values, valid slugs, and server-rendered defaults. |
+| Browser server startup fails | Port 3018 must be free; stop only a process you own or use an explicit target. |
+| Browser cannot launch | Installed Chrome, version guard, and optional executable override below. |
+| Dead-code check fails | Remove unused code, add a real consumer, or document a necessary exception in `scripts/dead-code-check.mjs`. |
+| Old persona/template URL 404s | Expected: those routes and their content have been retired. |
 
-## Browser runtime
+## Browser Runtime
 
 Chromium projects use installed Google Chrome with a separate temporary Playwright
-profile. Install Chrome before browser tests; run `pnpm test:browser-runtime` to
-check the version guard. The suite's global setup rejects Chrome older than
-156.0.8078.79 (CVE-2026-76024) before loading test pages. Playwright 1.64.1's bundled
-Chromium 156.0.8078.4 does not meet this floor. Project names and snapshot paths
-remain `chromium`.
+profile. Install Chrome before browser checks. `pnpm test:browser-runtime` tests
+the version guard and an isolated DOM interaction; it does not load the app.
 
-`PLAYWRIGHT_CHROME_EXECUTABLE_PATH` can select an explicitly provisioned Chrome
-for Testing executable; its actual reported version must pass the same guard.
-There is no fallback to bundled Chromium. macOS uses its installed Chrome and
-Chromium sandbox. No browser CI is configured in this repository; install and update Chrome on
-the machine running the suite.
-Revisit the temporary browser choice when a stable Playwright browser manifest
-includes the fix; qualify that browser through the consumer tests before changing
-back. This version floor addresses the named CVE, not all future browser advisories.
+`scripts/browser-runtime.cjs` owns the minimum Chrome version for CVE-2026-76024.
+The bundled Chromium in the locked Playwright version is below that floor, so
+there is no fallback to it. `PLAYWRIGHT_CHROME_EXECUTABLE_PATH` can select a
+provisioned Chrome for Testing executable; its reported version must pass the
+same guard. macOS uses Chrome's sandbox. No browser CI is configured; install and
+update Chrome on the machine running the suite.
+
+Revisit this temporary choice when a stable Playwright browser manifest includes
+the fix; qualify it through consumer checks before changing back. This floor
+addresses the named CVE, not all future browser advisories.

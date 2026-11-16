@@ -1,47 +1,38 @@
 # Features
 
-Product-surface reference for Compendium.
+## Influence Index
 
-## Persona Pages
+The homepage is a portrait directory of people who shaped industries,
+institutions, and culture. Search matches words across names, roles, biography,
+ideas, tags, quotes, and milestones, ignoring case and accents. Field filters
+combine with search; sorting uses first milestone, surname, or newest milestone.
+The `/` key focuses search outside editable controls. Directory filters are local
+page state, not shareable URL state.
 
-- Image slideshows of one-pager advice from entrepreneurs and technologists.
-- Swiper-based carousel with touch/swipe support.
-- Zoom and pan controls via `react-zoom-pan-pinch`.
-- Pixel art avatars for each persona.
+Profiles present ideas, motivations, impact, sourced quotes and fun facts, career
+milestones, related profiles, and field notes. Their source list combines and
+deduplicates the profile's source URLs.
 
-## Template Pages
+Field notes connect profiles through a shared problem and a reflection prompt.
+The timeline orders all milestones by year, groups early dates by century and
+modern dates by decade, and filters by field. Approximate dates are marked;
+pre-common-era dates use BCE.
 
-- PDF viewer for downloadable templates.
-- Page navigation and zoom controls.
-- Templates: Personal Planner, TimeBox Template.
+Comparison displays two profiles side by side. The `left` and `right` slug query
+parameters preserve the selection for reloads and sharing. Missing or unknown
+slugs fall back to valid defaults. The view compares editorial content; it does
+not rank people or calculate an influence score.
 
-## Category Browsing
+Portraits are generated editorial illustrations; ancient portraits are artistic
+reconstructions. Quotes and fun facts link to sources. Automated integrity checks
+validate structure and references, not the truth or completeness of the writing.
 
-- Filter personas by category.
-- 8 categories with color-coded badges:
-  - Productivity, Success, Startups, Fundraising
-  - Hiring, Career, Life Advice, Communication
+## Navigation And Appearance
 
-## Navigation
+The masthead links to People, Themes, Timeline, and Compare. The footer and byline
+link to About. A skip link moves keyboard focus to the reading area. The app uses
+a dark editorial theme, adapts to narrow screens, and has no theme toggle.
 
-- Desktop: Fixed sidebar with persona list and category links.
-- Mobile: Hamburger menu opening a slide-out sheet.
-- Sidebar shows all personas and category filters.
-
-## Personas
-
-| Persona | Content Items |
-|---------|--------------|
-| Daniel Gross | 1 |
-| Elon Musk | 2 |
-| Marc Andreessen | 4 |
-| Nat Friedman | 1 |
-| Naval Ravikant | 1 |
-| Paul Graham | 2 |
-| Sam Altman | 3 |
-| Tim Ferriss | 1 |
-
-## Dark Mode
-
-- Dark mode is the default theme.
-- Tailwind `dark:` variants for theme-aware styling.
+Content is repository-authored and available without an account. No CMS,
+database, or external content API is required. Adding content requires a rebuild.
+The former Library, one-pagers, and PDF templates have been retired.

@@ -35,8 +35,6 @@ const NEXTJS_FRAMEWORK_EXPORTS = new Set([
   "fetchCache",
 ]);
 
-const BROAD_API_DIRS = ["src/components/ui"];
-
 const EXPORT_EXCEPTIONS = new Set([]);
 
 const FILE_EXCEPTIONS = new Set([]);
@@ -150,10 +148,6 @@ function resolveLocalImport(specifier, fromFile, candidates) {
   return resolveCandidate(base, candidates);
 }
 
-function isInBroadApiDir(relPath) {
-  return BROAD_API_DIRS.some((dir) => relPath.startsWith(`${dir}/`));
-}
-
 function fail(message) {
   console.error(message);
   process.exit(1);
@@ -168,7 +162,6 @@ const unreferenced = [];
 for (const filePath of sourceFiles) {
   const relPath = path.relative(ROOT, filePath);
   const isConvention = NEXTJS_CONVENTION_RE.test(filePath);
-  if (isInBroadApiDir(relPath)) continue;
 
   const content = fileContents.get(filePath) ?? "";
   for (const { name, isDefaultName } of extractExports(content)) {

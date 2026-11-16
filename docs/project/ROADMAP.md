@@ -1,16 +1,17 @@
 # Roadmap
 
-Compendium remains a static, curated site for founder/operator one-pagers and
-templates. Content is checked into the repository and rendered through the
-existing persona, category, and template pages;
-[Features](../system/FEATURES.md) owns current behavior and
-[Operations](../system/OPERATIONS.md) explains adding content.
+The Influence Index is the sole Compendium reading experience. Keep profiles and
+field notes sourced and easy to explore on desktop and mobile. The original
+one-pagers, templates, and Library are retired; preserving their routes is not a
+product requirement.
 
-## Current Direction
+After the overhaul lands, rename the project and GitHub repository to
+`influence-index`. Carry the local folder, Git remotes, package identity,
+contributor links, and any hosting configuration through that rename together;
+verify the live deployment and remote URLs before treating it as complete.
+The repository remains named `compendium` until that follow-up.
 
-Keep content easy to browse on desktop and mobile, and preserve the source and
-rights of published assets. Changes to navigation or presentation should be
-checked in a real browser. No next feature or release schedule is selected here.
-
-[Backlog](BACKLOG.md) holds durable unresolved concerns when they arise. Git and
-PRs retain routine delivery history.
+[Features](../system/FEATURES.md) describes current behavior;
+[Operations](../system/OPERATIONS.md) owns content editing and verification.
+[Backlog](BACKLOG.md) holds unresolved candidates. Git and PRs retain delivery
+history.

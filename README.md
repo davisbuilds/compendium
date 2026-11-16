@@ -1,86 +1,44 @@
-# Compendium
+# Compendium — The Influence Index
 
-Static Next.js site for curated one-pagers, templates, and advice from successful
-entrepreneurs and technologists.
+A retro field guide to people who shaped industries, institutions, and culture.
+Browse illustrated profiles, explore career milestones, compare two people, and
+read field notes connecting their ideas.
 
-## Agent Setup
-
-New here? Paste the prompt below into your coding agent (Claude Code, Codex, etc.) and it will install, verify, and tell you how to launch the site.
-
-```text
-Set up the `compendium` repo for me. It's a curated one-pager/template site built
-with Next.js 16, React 19, Tailwind 4, and TypeScript. All content is static
-(hardcoded in `src/lib/content.ts`) — there are no env vars or secrets.
-
-Do this, in order:
-1. Install deps with pnpm (not npm/yarn): `pnpm install` from the repo root. Clone
-   https://github.com/davisbuilds/compendium.git and cd in first if needed.
-2. Verify it builds: run `pnpm lint`, `pnpm test:dead-code`, then `pnpm build`.
-   All should pass. If any fail, show me the error and stop.
-3. Report back: confirm lint + dead-code + build passed, and give me the command to run it
-   (`pnpm dev`, then open http://localhost:3000).
-
-Don't commit anything.
-```
-
-Prefer to do it yourself? The manual steps are below.
-
-## What It Does
-
-- Presents curated founder/operator one-pagers and templates.
-- Keeps content static in `src/lib/content.ts`.
-- Uses a Next.js 16 / React 19 / Tailwind 4 frontend.
-- Ships without runtime secrets or environment variables.
-- Includes a dead-code check for the small static app surface.
+Built with Next.js App Router, React, TypeScript, and Tailwind CSS. Content and
+portraits are checked in. No environment variables, database, or external content
+service are required.
 
 ## Quick Start
 
-Requirements:
-
-- Node.js compatible with Next.js 16
-- pnpm
+Use Node.js 24 and the pnpm version declared in `package.json`.
 
 ```bash
-git clone https://github.com/davisbuilds/compendium.git
-cd compendium
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
 Open `http://localhost:3000`.
 
-## Common Commands
+## Checks
 
 ```bash
-pnpm dev             # Start local dev server
-pnpm lint            # ESLint
-pnpm test:dead-code  # Static dead-code check
-pnpm build           # Production build
-pnpm start           # Start production server after build
+pnpm test                 # Lint, unit tests, and dead-code check
+pnpm build                # Production build
+pnpm test:browser         # Production-build application journeys in Chrome
+pnpm test:browser-runtime # Chrome guard and isolated DOM smoke test only
 ```
 
-## Code Layout
-
-```text
-src/app/          Next.js App Router routes
-src/components/   UI components
-src/lib/          Static content and shared helpers
-scripts/          Dead-code check
-docs/             System and project docs
-```
+See [Operations](docs/system/OPERATIONS.md) for browser prerequisites, coverage,
+manual checks, content editing, and deployment.
 
 ## Documentation
 
-- Agent implementation guidance: [AGENTS.md](AGENTS.md)
-- Architecture and code organization: [docs/system/ARCHITECTURE.md](docs/system/ARCHITECTURE.md)
-- Feature reference: [docs/system/FEATURES.md](docs/system/FEATURES.md)
-- Setup and operations: [docs/system/OPERATIONS.md](docs/system/OPERATIONS.md)
-- Product roadmap snapshot: [docs/project/ROADMAP.md](docs/project/ROADMAP.md)
-- Git history and branch policy: [docs/project/GIT_HISTORY_POLICY.md](docs/project/GIT_HISTORY_POLICY.md)
-- Contributor workflow and PR expectations: [CONTRIBUTING.md](CONTRIBUTING.md)
+- [AGENTS.md](AGENTS.md) — coding-agent entry point and invariants.
+- [Architecture](docs/system/ARCHITECTURE.md) — routes, data ownership, and rendering.
+- [Features](docs/system/FEATURES.md) — reader capabilities and limits.
+- [Roadmap](docs/project/ROADMAP.md) and [Backlog](docs/project/BACKLOG.md) — direction and unresolved work.
+- [Contributing](CONTRIBUTING.md) — contribution, review, and delivery expectations.
 
-## Current Boundaries
-
-- Content is static and repo-authored.
-- There are no runtime env vars or secrets.
-- `pnpm lint`, `pnpm test:unit`, `pnpm test:dead-code`, and `pnpm build` are the expected local gates.
+The portraits are generated editorial illustrations; ancient portraits are
+artistic reconstructions. Each biographical profile links to its sources,
+including the material used for its quote and fun fact.
