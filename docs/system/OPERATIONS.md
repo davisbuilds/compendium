@@ -100,6 +100,11 @@ The Vercel project is `influence-index` in the `davisbuilds-projects` team. It u
 Next.js and Node.js 24.x, with framework-default build/install commands and the
 pnpm version pinned by `package.json`. No application secrets are required.
 
+Vercel's Git integration is connected: it builds a preview deployment for every
+pull request and deploys each commit on `main` to production. Merging a PR is
+therefore a production deploy; confirm the PR head's preview deployment
+succeeded before merging. Use the CLI below only for a deploy outside that flow.
+
 From a clean checkout at the intended commit:
 
 ```bash
