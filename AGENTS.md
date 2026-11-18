@@ -1,44 +1,27 @@
 # AGENTS.md
 
-The Influence Index is a static editorial field guide to people who
-shaped industries, institutions, and culture. It uses Next.js App Router, React,
+The Influence Index is a static editorial field guide to people who shaped
+industries, institutions, and culture, built with Next.js App Router, React,
 TypeScript, and Tailwind. Content and portraits live in the repository; there is
 no database or external content service. The former one-pager/PDF Library has
 been removed. Do not restore its routes, assets, or dependencies.
 
 ## Documentation Map
 
-- [Architecture](docs/system/ARCHITECTURE.md) — routing, data ownership, and rendering boundaries.
+- [Architecture](docs/system/ARCHITECTURE.md) — routing, data ownership, rendering boundaries, and where each concern lives in `src/`.
 - [Features](docs/system/FEATURES.md) — reader capabilities and semantic limits.
-- [Operations](docs/system/OPERATIONS.md) — setup, content editing, checks, and deployment.
+- [Operations](docs/system/OPERATIONS.md) — setup, content editing, checks, browser verification, and deployment.
 - [Roadmap](docs/project/ROADMAP.md) — selected direction; [Backlog](docs/project/BACKLOG.md) — unresolved candidates.
-- [Contributing](CONTRIBUTING.md) — contribution and review expectations; [Git policy](docs/project/GIT_HISTORY_POLICY.md) — merge and branch policy.
+- [Contributing](CONTRIBUTING.md) — contribution and review expectations; [Git policy](docs/project/GIT_HISTORY_POLICY.md) — merge settings, required checks, and branch hygiene.
 
-## Setup And Checks
+## Verification
 
-Use Node.js 24 and the pnpm version in `package.json`. Install with
-`pnpm install --frozen-lockfile`; use `pnpm dev` for local development.
-
-Before pushing, run `pnpm test` (lint, unit tests, dead-code check) and
-`pnpm build`. For UI/routing work, run `pnpm test:browser` and the relevant manual
-checks in [Operations](docs/system/OPERATIONS.md#application-browser-verification).
+Use Node.js 24 and `pnpm install --frozen-lockfile`. The gate, matching CI, is
+`pnpm test` (lint, unit tests, dead-code check) and `pnpm build`. For UI or
+routing work, also run `pnpm test:browser` and the relevant manual checks in
+[Operations](docs/system/OPERATIONS.md#application-browser-verification).
 `pnpm test:browser-runtime` verifies only the Chrome guard and an isolated DOM
-interaction. Push only when explicitly asked.
-
-Use red/green TDD for substantial behavior changes. The red test must fail on the
-behavior being fixed, not just a missing symbol. For smaller changes, run the
-relevant existing checks.
-
-## Source Entry Points
-
-| Responsibility | Source |
-| --- | --- |
-| Profiles, fields, and field notes | `src/lib/influence/archive.ts`; schema in `types.ts` |
-| Derived lookups, filters, and directory payload | `src/lib/influence/data.ts`; shared formatting in `format.ts` |
-| Pages and scoped design styles | `src/app/(index)/` |
-| Interactive directory, timeline, comparison, navigation | `src/components/influence/` |
-| Root document, shared CSS, and metadata defaults | `src/app/layout.tsx`, `src/app/globals.css` |
-| Application browser checks | `tests/`; see Operations for the entry point |
+interaction, not the application.
 
 ## Boundaries To Preserve
 
@@ -65,24 +48,42 @@ relevant existing checks.
 
 ## Working Agreement
 
-- **Push back before building.** If a request is incoherent or self-contradictory, or a spec/plan is vague or skips key decisions, stop and interview me — ask clarifying questions and confirm intent before writing code or changing files. Don't guess at scope or comply silently. (Clear, well-scoped requests don't need this.)
-- **Log durable follow-ups in `BACKLOG.md`.** Capture consequential design gaps,
-  tech debt, and better approaches in `docs/project/BACKLOG.md`; fix small or
-  blocking issues inline. Keep entries future-only, with evidence and a next step
-  or revisit trigger; date/source volatile claims or label hypotheses. The
-  capability-owning repo holds cross-repo detail. Agents can work directly from
-  entries; use issues for discussion or coordination with one detailed owner.
-  Reconcile affected entries as work lands; update `ROADMAP.md` when selected
-  direction changes, not as a shipment log.
-- **Keep docs current.** Update the owning reference when a change makes its contract, boundary, procedure, or direction inaccurate. Routine internal changes need no ceremonial doc edit.
+- **Clarify before building** when a request is vague, contradictory, or skips a
+  key decision; clear, well-scoped requests need no interview.
+- **Fix small issues now; backlog the rest.** Fix simple, quick, or blocking
+  issues in this repo as part of the current change and call them out. Record in
+  `docs/project/BACKLOG.md` only what can't be finished now or needs the
+  maintainer's decision; don't open a branch or PR just for a backlog entry.
+  Keep entries future-only, with evidence and a next step or revisit trigger,
+  and update `ROADMAP.md` when selected direction changes, not as a shipment log.
+- **Keep docs current** when a change makes a documented contract, boundary,
+  procedure, or direction stale.
 - **Plan and hand off work.** Reuse clear task context. Save planning docs when
   decisions, acceptance, or coordination need persistence. Leave a brief
   handoff only when needed to resume unfinished work. Commit shared docs and
   keep status current. Before archiving reviewed, completed docs in ignored
   `docs/archive/`, preserve lasting decisions and open work in maintained docs
   and repair links.
-- **Commit logically.** Commit completed work in coherent chunks as you proceed. Push only when explicitly asked.
-- **Re-ground after compaction.** A compaction summary loses precise paths, context, and verification state — before continuing, re-read this project's `AGENTS.md`, its reference docs, and recent commits.
+- **TDD:** red/green for features, major refactors and large changes; the red
+  test must fail on the behavior, not on a missing symbol. For smaller edits, run
+  the relevant existing checks.
+- **Commit and push.** Commit coherent chunks, staging by explicit path. Push
+  your task branch and open a PR once the work is complete and the local gate
+  passes; don't push directly to `main`.
+- **Merge** only under the standing merge authority in the maintainer's
+  workspace instructions, or when the maintainer asks. Without those
+  instructions in context, leave the PR for the maintainer.
+- **Re-ground after compaction** in source, this file, the owning docs, and
+  recent commits. A summary and your own earlier proposals are not user approval.
+
+## Git
+
+Squash-merge only; merged branches are deleted. `main` requires the
+`Lint, dead code, and build` and `check` jobs; the
+[Git policy](docs/project/GIT_HISTORY_POLICY.md) owns the details. Vercel's Git
+integration builds a preview for every PR and deploys each `main` commit, so
+**merging deploys production**: a successful Vercel preview deployment of the
+PR head is required before merging.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
