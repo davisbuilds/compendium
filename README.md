@@ -24,7 +24,7 @@ Open `http://localhost:3000`.
 ## Checks
 
 ```bash
-pnpm test                 # Lint, unit tests, and dead-code check
+pnpm test                 # Lint, comment ratchet, unit tests, and dead-code check
 pnpm build                # Production build
 pnpm test:browser         # Production-build application journeys in Chrome
 pnpm test:browser-runtime # Chrome guard and isolated DOM smoke test only

@@ -15,17 +15,18 @@ database, or external content service are required.
 ## Verification
 
 ```bash
-pnpm test           # Lint, node:test unit tests, and dead-code check
+pnpm test           # Lint, comment ratchet, node:test unit tests, and dead-code check
 pnpm build          # Type checking and production route generation
 pnpm test:browser   # Build and run application journeys in installed Chrome
 ```
 
-Lint, unit tests, dead-code checks, and build are the pre-push gates. Run browser
-checks for UI/routing changes. CI runs the four non-browser checks separately on
-pull requests to `main` and pushes to `main`; `.github/workflows/ci.yml` owns its
-toolchain pins and behavior. Publication hygiene and workflow security have their
-own workflows. [Git policy](../project/GIT_HISTORY_POLICY.md) distinguishes CI
-execution from the last observed branch-protection settings.
+Lint, the comment ratchet, unit tests, dead-code checks, and build are the
+pre-push gates. Run browser checks for UI/routing changes. CI runs the five
+non-browser checks separately on pull requests to `main` and pushes to `main`;
+`.github/workflows/ci.yml` owns its toolchain pins and behavior. Publication
+hygiene and workflow security have their own workflows.
+[Git policy](../project/GIT_HISTORY_POLICY.md) distinguishes CI execution from the
+last observed branch-protection settings.
 
 Unit tests check archive identity, assets, fields, finite milestone years, source
 URL structure, field-note references, and key rendered links/not-found behavior.
@@ -137,6 +138,7 @@ public URL or server-rendered comparison route works.
 | Compare selection differs on reload | `left`/`right` query values, valid slugs, and server-rendered defaults. |
 | Browser server startup fails | Port 3018 must be free; stop only a process you own or use an explicit target. |
 | Browser cannot launch | Installed Chrome, version guard, and optional executable override below. |
+| Comment ratchet fails | Delete the new comment, or start it with `WHY:` when it records a non-obvious decision. After deleting comments, run `python3 scripts/check_comments.py --update`. |
 | Dead-code check fails | Remove unused code, add a real consumer, or document a necessary exception in `scripts/dead-code-check.mjs`. |
 | Old persona/template URL 404s | Expected: those routes and their content have been retired. |
 

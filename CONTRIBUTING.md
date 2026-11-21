@@ -35,8 +35,9 @@ with relevant verification and limitations. Merge after applicable checks pass
 and review conversations are resolved.
 
 [Operations](docs/system/OPERATIONS.md) owns content setup and checks, including
-lint, unit tests, dead-code checks, builds, and relevant browser verification.
-The [Git policy](docs/project/GIT_HISTORY_POLICY.md) owns the squash-merge workflow.
+lint, the comment ratchet, unit tests, dead-code checks, builds, and relevant
+browser verification. The [Git policy](docs/project/GIT_HISTORY_POLICY.md) owns
+the squash-merge workflow.
 
 Update the owning reference when its claims change and reconcile affected backlog
 entries. Roadmap tracks direction; Git and PRs hold routine delivery history.
