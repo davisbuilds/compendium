@@ -28,6 +28,7 @@ Squash-merge only. All other merge strategies are disabled at the repository lev
 Tracked `.github/workflows/ci.yml` runs on pull requests and main pushes. It checks:
 
 - `pnpm lint`
+- `python3 scripts/check_comments.py`
 - `pnpm test:unit`
 - `pnpm test:dead-code`
 - `pnpm build`
